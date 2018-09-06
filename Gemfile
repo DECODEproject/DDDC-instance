@@ -27,4 +27,12 @@ group :development do
   gem "spring", "~> 2.0"
   gem "spring-watcher-listen", "~> 2.0"
   gem "web-console", "~> 3.5"
+
+  # deploy
+  gem "capistrano", "3.8.0", require: false
+  gem "capistrano-bundler", "~> 1.2", require: false
+  gem "capistrano-passenger"
+  gem "capistrano-rails", "1.1.8", require: false
+  gem "capistrano-rbenv"
+  gem "capistrano3-delayed-job", "~> 1.0"
 end
