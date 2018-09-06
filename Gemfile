@@ -12,6 +12,7 @@ gem "bootsnap", "~> 1.3"
 gem "puma", "~> 3.0"
 gem "uglifier", "~> 4.1"
 gem "faker", "~> 1.8"
+gem "daemons"
 gem "delayed_job_active_record"
 
 group :development, :test do

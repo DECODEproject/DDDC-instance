@@ -724,6 +724,7 @@ DEPENDENCIES
   capistrano-rails (= 1.1.8)
   capistrano-rbenv
   capistrano3-delayed-job (~> 1.0)
+  daemons
   decidim (= 0.13.1)
   decidim-dev (= 0.13.1)
   delayed_job_active_record
