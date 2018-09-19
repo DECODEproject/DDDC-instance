@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_06_093518) do
+ActiveRecord::Schema.define(version: 2018_09_19_104755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -349,6 +349,25 @@ ActiveRecord::Schema.define(version: 2018_09_06_093518) do
     t.string "reference"
     t.integer "decidim_user_group_id"
     t.index ["decidim_component_id"], name: "index_decidim_debates_debates_on_decidim_component_id"
+  end
+
+  create_table "decidim_dpetitions_dpetitions", id: :serial, force: :cascade do |t|
+    t.jsonb "title"
+    t.jsonb "description"
+    t.jsonb "instructions"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string "image"
+    t.integer "decidim_component_id"
+    t.integer "decidim_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "information_updates"
+    t.integer "decidim_author_id"
+    t.string "reference"
+    t.integer "decidim_user_group_id"
+    t.index ["decidim_category_id"], name: "index_decidim_dpetitions_dpetitions_on_decidim_category_id"
+    t.index ["decidim_component_id"], name: "index_decidim_dpetitions_dpetitions_on_decidim_component_id"
   end
 
   create_table "decidim_follows", force: :cascade do |t|
