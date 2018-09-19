@@ -1,0 +1,134 @@
+gl:
+  activemodel:
+    attributes:
+      dpetition:
+        category_id: Categoría
+        decidim_category_id: Categoría
+        description: Descrición
+        end_time: Remata a
+        information_updates: Actualizacións de información
+        instructions: Instrucións para participar
+        start_time: Comeza en
+        title: Título
+        user_group_id: Crear dpetition como
+    models:
+      decidim/dpetitions/create_dpetition_event: Dpetition
+      decidim/dpetitions/creation_disabled_event: Dpetitions desactivados
+      decidim/dpetitions/creation_enabled_event: Dpetitions habilitados
+  activerecord:
+    models:
+      decidim/dpetitions/dpetition:
+        one: Dpetition
+        other: Dpetitions
+  decidim:
+    components:
+      dpetitions:
+        actions:
+          create: Crear
+        name: Dpetitions
+        settings:
+          global:
+            announcement: Anuncio
+            comments_enabled: Comentarios habilitados
+          step:
+            announcement: Anuncio
+            comments_blocked: Comentarios bloqueados
+            creation_enabled: Dpetition creado polos usuarios activado
+    dpetitions:
+      actions:
+        confirm_destroy: Estás seguro?
+        destroy: Eliminar
+        edit: Editar
+        new: Novo %{name}
+        title: Accións
+      admin:
+        dpetitions:
+          create:
+            invalid: Produciuse un problema ao crear o dpetition.
+            success: Dpetition creouse con éxito.
+          destroy:
+            success: Dpetition eliminado con éxito.
+          edit:
+            title: Editar dpetition
+            update: Actualizar dpetition
+          index:
+            title: Dpetitions
+          new:
+            create: Crear dpetition
+            title: Novo dpetition
+          update:
+            invalid: Houbo un problema ao actualizar este dpetition.
+            success: Dpetition actualizado con éxito.
+        models:
+          dpetition:
+            name: Dpetition
+      admin_log:
+        dpetition:
+          create: "%{user_name} creou o %{resource_name} dpetition sobre o espazo %{space_name}"
+          update: "%{user_name} actualizou o %{resource_name} dpetition sobre o espazo %{space_name}"
+      dpetitions:
+        count:
+          dpetitions_count:
+            one: "Dpetition %{count}"
+            other: "%{count} dpetitions"
+        create:
+          invalid: Produciuse un problema ao crear o dpetition.
+          success: Dpetition creouse con éxito.
+        dpetition:
+          participate: Participar
+        filters:
+          all: Todo
+          category: Categoría
+          category_prompt: Selecciona unha categoría
+          citizens: Cidadáns
+          official: Oficial
+          origin: Orixe
+          search: Busca
+        filters_small_view:
+          close_modal: Pechar modal
+          filter: Filtro
+          filter_by: Filtrar por
+          unfold: Despregar
+        index:
+          new_dpetition: Novo dpetition
+        new:
+          back: De volta
+          create: Crear
+          select_a_category: Selecciona unha categoría
+          title: Novo dpetition
+        share:
+          close_window: Pechar ventá
+          share: Comparte
+          share_link: Compartir a ligazón
+      models:
+        dpetition:
+          fields:
+            end_time: Data de finalización
+            official_dpetition: Dpetition oficial
+            start_time: Data de inicio
+            title: Título
+    events:
+      dpetitions:
+        create_dpetition_event:
+          space_followers:
+            email_intro: |-
+              Ola, creouse un novo dpetition sobre o espazo participativo %{space_title}, verifícalo e contribuír:
+            email_outro: Recibiches esta notificación porque estás seguindo o %{space_title} espazo participativo. Podes deixar de recibir notificacións seguindo a ligazón anterior.
+            email_subject: Novo dpetition sobre %{space_title}
+            notification_title: O <a href="%{resource_path}">%{resource_title}</a> dpetition foi creado en <a href="%{space_path}">%{space_title}</a>.
+          user_followers:
+            email_intro: |-
+              Ola, %{author_name} %{author_nickname}, a quen estás seguindo, creou un novo dpetition, revisádeo e contribuíu:
+            email_outro: Recibiches esta notificación porque estás seguindo %{author_nickname}. Podes deixar de recibir notificacións seguindo a ligazón anterior.
+            email_subject: Novo dpetition por %{author_nickname}
+            notification_title: O <a href="%{resource_path}">%{resource_title}</a> dpetition foi creado por <a href="%{author_path}">%{author_name} %{author_nickname}</a>.
+        creation_disabled:
+          email_intro: 'A creación de dpetitions xa non está activa en %{participatory_space_title}. Aínda podes participar nos dpetitions abertos desta páxina:'
+          email_outro: Recibiches esta notificación porque estás seguindo %{participatory_space_title}. Podes deixar de recibir notificacións seguindo a ligazón anterior.
+          email_subject: Creación de dpetitions desactivada en %{participatory_space_title}
+          notification_title: A creación de dpetitions agora está desactivada en <a href="%{participatory_space_url}">%{participatory_space_title}</a>
+        creation_enabled:
+          email_intro: 'Agora podes comezar novos dpetitions en %{participatory_space_title}. Comezar a participar nesta páxina:'
+          email_outro: Recibiches esta notificación porque estás seguindo %{participatory_space_title}. Podes deixar de recibir notificacións seguindo a ligazón anterior.
+          email_subject: Os dpetitions agora están dispoñibles en %{participatory_space_title}
+          notification_title: Agora podes comezar <a href="%{resource_path}">novos dpetitions</a> en <a href="%{participatory_space_url}">%{participatory_space_title}</a>

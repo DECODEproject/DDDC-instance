@@ -1,0 +1,9 @@
+var $dpetitions = $('#dpetitions');
+var $dpetitionsCount = $('#dpetitions-count');
+var $orderFilterInput = $('.order_filter');
+
+$dpetitions.html('<%= j(render partial: "dpetitions").strip.html_safe %>');
+$dpetitionsCount.html('<%= j(render partial: "count").strip.html_safe %>');
+
+var $dropdownMenu = $('.dropdown.menu', $dpetitions);
+$dropdownMenu.foundation();

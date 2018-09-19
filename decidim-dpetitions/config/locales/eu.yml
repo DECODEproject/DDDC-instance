@@ -1,0 +1,134 @@
+eu:
+  activemodel:
+    attributes:
+      dpetition:
+        category_id: Kategoria
+        decidim_category_id: Kategoria
+        description: deskribapena
+        end_time: Amaitzen du
+        information_updates: Informazioaren eguneratzeak
+        instructions: Parte hartzeko argibideak
+        start_time: Hasi da
+        title: Izenburua
+        user_group_id: Sortu eztabaida gisa
+    models:
+      decidim/dpetitions/create_dpetition_event: Dpetition
+      decidim/dpetitions/creation_disabled_event: Dpetitionak desgaituta daude
+      decidim/dpetitions/creation_enabled_event: Dpetitionak gaituta
+  activerecord:
+    models:
+      decidim/dpetitions/dpetition:
+        one: Dpetition
+        other: eztabaidak
+  decidim:
+    components:
+      dpetitions:
+        actions:
+          create: Sortu
+        name: eztabaidak
+        settings:
+          global:
+            announcement: Anuntzio
+            comments_enabled: Iruzkinak gaituta
+          step:
+            announcement: Anuntzio
+            comments_blocked: Iruzkinak blokeatuta
+            creation_enabled: Erabiltzaileek gaitutako eztabaida sortzea
+    dpetitions:
+      actions:
+        confirm_destroy: Ziur zaude?
+        destroy: ezabatu
+        edit: Editatu
+        new: '%{name} berria'
+        title: Ekintzak
+      admin:
+        dpetitions:
+          create:
+            invalid: Arazo bat izan da eztabaida sortzen ari den bitartean.
+            success: Dpetition sortu da behar bezala.
+          destroy:
+            success: Debata zuzen ezabatu da.
+          edit:
+            title: Editatu eztabaida
+            update: Eguneratu eztabaida
+          index:
+            title: eztabaidak
+          new:
+            create: Sortu eztabaida
+            title: Berri eztabaida
+          update:
+            invalid: Arazo bat izan da eztabaida hau eguneratzean.
+            success: Dpetition arrakastaz eguneratu da.
+        models:
+          dpetition:
+            name: Dpetition
+      admin_log:
+        dpetition:
+          create: "%{user_name} %{resource_name} eztabaida sortu zen %{space_name} espazioan"
+          update: "%{user_name} %{resource_name} eztabaida eguneratu zen %{space_name} espazioan"
+      dpetitions:
+        count:
+          dpetitions_count:
+            one: "%{count} eztabaida"
+            other: "%{count} eztabaidak"
+        create:
+          invalid: Arazo bat izan da eztabaida sortzen ari den bitartean.
+          success: Dpetition sortu da behar bezala.
+        dpetition:
+          participate: Parte hartu
+        filters:
+          all: guztiak
+          category: Kategoria
+          category_prompt: Aukeratu kategoria bat
+          citizens: Hiritarrak
+          official: Ofiziala
+          origin: Origin
+          search: Search
+        filters_small_view:
+          close_modal: Itxi modal
+          filter: Filter
+          filter_by: Iragazi arabera
+          unfold: Zabaldu
+        index:
+          new_dpetition: Berri eztabaida
+        new:
+          back: Back
+          create: Sortu
+          select_a_category: Hautatu kategoria bat
+          title: Berri eztabaida
+        share:
+          close_window: Itxi leihoa
+          share: Share
+          share_link: Partekatu esteka
+      models:
+        dpetition:
+          fields:
+            end_time: Amaiera data
+            official_dpetition: Ofizial eztabaida
+            start_time: Hasiera data
+            title: Izenburua
+    events:
+      dpetitions:
+        create_dpetition_event:
+          space_followers:
+            email_intro: |-
+              Kaixo, %{space_title} partaidetzako espazioan eztabaida berria sortu da, egiaztatu eta lagundu:
+            email_outro: Jakinarazpen hori jaso duzu %{space_title} partaidetzazko espazioa jarraituz gero. Aurreko esteka jarraituz jakinarazpenak jasotzeari uztea erabaki dezakezu.
+            email_subject: Eztabaida berria %{space_title}
+            notification_title: <a href="%{resource_path}">%{resource_title}</a> eztabaida sortu zen <a href="%{space_path}">%{space_title}</a>.
+          user_followers:
+            email_intro: |-
+              Kaixo, %{author_name} %{author_nickname}, jarraitzen ari zarenak, eztabaida berri bat sortu du, egiaztatu eta lagundu:
+            email_outro: Jakinarazpena jaso duzu %{author_nickname} jarraituz gero. Aurreko esteka jarraituz jakinarazpenak jasotzeari uztea erabaki dezakezu.
+            email_subject: Eztabaida berria %{author_nickname}-ri
+            notification_title: <a href="%{resource_path}">%{resource_title}</a> eztabaida sortu zen <a href="%{author_path}">%{author_name} %{author_nickname}</a>.
+        creation_disabled:
+          email_intro: 'Dpetition sortzea ez dago aktibo %{participatory_space_title}. Oraindik eztabaidak ireki ditzakezu orri honetatik:'
+          email_outro: Jakinarazpena jaso duzu %{participatory_space_title}jarraituz gero. Aurreko esteka jarraituz jakinarazpenak jasotzeari uztea erabaki dezakezu.
+          email_subject: Dpetition sortzea desgaituta %{participatory_space_title}
+          notification_title: Dpetitionen sorrera desaktibatuta dago orain <a href="%{participatory_space_url}">%{participatory_space_title}</a>
+        creation_enabled:
+          email_intro: 'Orain %{participatory_space_title}hizketaldi berriak hasi ditzakezu! Hasi orri honetan parte hartzea:'
+          email_outro: Jakinarazpena jaso duzu %{participatory_space_title}jarraituz gero. Aurreko esteka jarraituz jakinarazpenak jasotzeari uztea erabaki dezakezu.
+          email_subject: Dpetitions orain eskuragarri %{participatory_space_title}
+          notification_title: Orain <a href="%{resource_path}">eztabaida berriak hasi ditzakezu</a> <a href="%{participatory_space_url}">%{participatory_space_title}</a>

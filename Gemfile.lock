@@ -1,3 +1,12 @@
+PATH
+  remote: decidim-dpetitions
+  specs:
+    decidim-dpetitions (0.13.1)
+      decidim-comments (= 0.13.1)
+      decidim-core (= 0.13.1)
+      kaminari (~> 1.0)
+      searchlight (~> 4.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -727,6 +736,7 @@ DEPENDENCIES
   daemons
   decidim (= 0.13.1)
   decidim-dev (= 0.13.1)
+  decidim-dpetitions!
   delayed_job_active_record
   ed25519
   faker (~> 1.8)
