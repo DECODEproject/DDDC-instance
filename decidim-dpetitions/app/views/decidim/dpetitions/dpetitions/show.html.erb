@@ -1,0 +1,67 @@
+<% add_decidim_meta_tags({
+  description: translated_attribute(dpetition.description),
+  title: translated_attribute(dpetition.title),
+  url: dpetition_url(dpetition.id)
+}) %>
+
+<div class="row column view-header">
+  <h2 class="heading2">
+    <%== translated_attribute dpetition.title %>
+  </h2>
+
+  <%= cell "decidim/author", Decidim::Dpetitions::DpetitionPresenter.new(dpetition).author, context: {extra_classes: ["author-data--small"]} %>
+
+</div>
+<div class="row">
+  <div class="columns section view-side mediumlarge-4 mediumlarge-push-8
+    large-3 large-push-9">
+    <div class="card extra">
+      <div class="card__content">
+        <% if dpetition.start_time.present? && dpetition.end_time.present? %>
+          <div class="extra__date">
+            <%= l dpetition.start_time, format: "%d" %> <span class="extra__month"><%= l dpetition.start_time, format: "%B" %></span>
+          </div>
+          <div class="extra__time">
+            <%= l dpetition.start_time, format: "%H:%M" %> - <%= l dpetition.end_time, format: "%H:%M" %>
+          </div>
+        <% end %>
+        <%= render partial: "decidim/shared/follow_button", locals: { followable: dpetition } %>
+      </div>
+    </div>
+    <%= resource_reference(dpetition) %>
+    <%= render partial: "share", locals: { dpetition: dpetition } %>
+  </div>
+  <div class="columns mediumlarge-8 mediumlarge-pull-4">
+    <div class="section">
+      <p><%= simple_format(translated_attribute(dpetition.description)) %></p>
+      <% if translated_attribute(dpetition.instructions).present? %>
+        <div class="callout secondary">
+          <%= simple_format(translated_attribute(dpetition.instructions)) %>
+        </div>
+      <% end %>
+      <% if translated_attribute(dpetition.information_updates).present? %>
+        <div class="callout success">
+          <%= simple_format(translated_attribute(dpetition.information_updates)) %>
+        </div>
+      <% end %>
+      <% if dpetition.category %>
+        <ul class="tags tags--dpetition">
+          <li><%= link_to translated_attribute(dpetition.category.name), dpetitions_path(filter: { category_id: dpetition.category.id }) %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= comments_for dpetition %>
+
+<%= javascript_include_tag "decidim/proposals/social_share" %>
+<%= stylesheet_link_tag "decidim/proposals/social_share" %>
+
+<%=
+  render partial: "decidim/shared/flag_modal", locals: {
+    reportable: dpetition,
+    form: report_form,
+    url: decidim.report_path(sgid: dpetition.to_sgid.to_s)
+  }
+%>

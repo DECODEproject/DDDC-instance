@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="card-divider">
+    <h2 class="card-title">
+      <%= t(".title") %>
+
+      <%= link_to t("actions.new", scope: "decidim.dpetitions", name: t("models.dpetition.name", scope: "decidim.dpetitions.admin")), new_dpetition_path, class: "button tiny button--title" if allowed_to? :create, :dpetition %>
+    </h2>
+  </div>
+
+  <div class="card-section">
+    <div class="table-scroll">
+      <table class="table-list">
+        <thead>
+          <tr>
+            <th><%= t("models.dpetition.fields.title", scope: "decidim.dpetitions") %></th>
+            <th><%= t("models.dpetition.fields.start_time", scope: "decidim.dpetitions") %></th>
+            <th><%= t("models.dpetition.fields.end_time", scope: "decidim.dpetitions") %></th>
+            <th class="actions"><%= t("actions.title", scope: "decidim.dpetitions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% dpetitions.each do |dpetition| %>
+            <tr data-id="<%= dpetition.id %>">
+              <td>
+                <%= link_to translated_attribute(dpetition.title), resource_locator(dpetition).path, target: :blank %><br />
+              </td>
+              <td>
+                <% if dpetition.start_time %>
+                  <%= l dpetition.start_time, format: :long %>
+                <% end %>
+              </td>
+              <td>
+                <% if dpetition.end_time %>
+                  <%= l dpetition.end_time, format: :long %>
+                <% end %>
+              </td>
+              <td class="table-list__actions">
+                <% if allowed_to? :update, :dpetition, dpetition: dpetition %>
+                  <%= icon_link_to "pencil", edit_dpetition_path(dpetition), t("actions.edit", scope: "decidim.dpetitions"), class: "action-icon--edit" %>
+                <% end %>
+
+                <% if allowed_to? :delete, :dpetition, dpetition: dpetition %>
+                  <%= icon_link_to "circle-x", dpetition_path(dpetition), t("actions.destroy", scope: "decidim.dpetitions"), method: :delete, class: "action-icon--remove", data: { confirm: t("actions.confirm_destroy", scope: "decidim.dpetitions") } %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,140 @@
+uk:
+  activemodel:
+    attributes:
+      dpetition:
+        category_id: Категорія
+        decidim_category_id: Категорія
+        description: Опис
+        end_time: 'Закінчується:'
+        information_updates: Оновлення відомостей
+        instructions: Вказівки до участі
+        start_time: 'Починається:'
+        title: Назва
+        user_group_id: Започаткувати обговорення як
+    models:
+      decidim/dpetitions/create_dpetition_event: Обговорення
+      decidim/dpetitions/creation_disabled_event: Обговорення вимкнене
+      decidim/dpetitions/creation_enabled_event: Обговорення увімкнене
+  activerecord:
+    models:
+      decidim/dpetitions/dpetition:
+        one: Обговорення
+        few: Обговорення
+        many: Обговорень
+        other: Обговорень
+  decidim:
+    components:
+      dpetitions:
+        actions:
+          create: Започаткувати
+        name: Обговорення
+        settings:
+          global:
+            announcement: Оголошення
+            comments_enabled: Коментарі увімкнено
+          step:
+            announcement: Оголошення
+            comments_blocked: Коментарі вимкнено
+            creation_enabled: Започаткування обговорень учасниками увімкнено
+    dpetitions:
+      actions:
+        confirm_destroy: Ви впевнені?
+        destroy: Видалити
+        edit: Редагувати
+        new: Додати %{name}
+        title: Дії
+      admin:
+        dpetitions:
+          create:
+            invalid: При спробі започаткувати обговорення сталася помилка.
+            success: Обговорення успішно започатковано.
+          destroy:
+            success: Обговорення успішно видалено.
+          edit:
+            title: Редагувати обговорення
+            update: Оновити обговорення
+          index:
+            title: Обговорення
+          new:
+            create: Започаткувати обговорення
+            title: Додати обговорення
+          update:
+            invalid: При спробі оновити обговорення сталася помилка.
+            success: Обговорення успішно оновлено.
+        models:
+          dpetition:
+            name: Обговорення
+      admin_log:
+        dpetition:
+          create: "%{user_name} започаткував обговорення %{resource_name} у просторі %{space_name}"
+          update: "%{user_name} оновив обговорення %{resource_name} у просторі %{space_name}"
+      dpetitions:
+        count:
+          dpetitions_count:
+            one: "%{count} обговорення"
+            few: "%{count} обговорення"
+            many: "%{count} обговорень"
+            other: "%{count} обговорень"
+        create:
+          invalid: При спробі започаткувати обговорення сталася помилка.
+          success: Обговорення успішно започатковано.
+        dpetition:
+          participate: Взяти участь
+        filters:
+          all: Усі
+          category: Категорія
+          category_prompt: Оберіть категорію
+          citizens: Громадяни
+          official: Службове
+          origin: Джерело
+          search: Шукати
+        filters_small_view:
+          close_modal: Закрити віконце
+          filter: Відібрати
+          filter_by: 'Відібрати за ознакою:'
+          unfold: Розгорнути
+        index:
+          new_dpetition: Додати обговорення
+        new:
+          back: Повернутись
+          create: Започаткувати
+          select_a_category: Будь ласка, виберіть категорію
+          title: Додати обговорення
+        share:
+          close_window: Закрити вікно
+          share: Поділитися
+          share_link: Поділитись посиланням
+      models:
+        dpetition:
+          fields:
+            end_time: Дата закінчення
+            official_dpetition: Службове обговорення
+            start_time: Дата початку
+            title: Назва
+    events:
+      dpetitions:
+        create_dpetition_event:
+          space_followers:
+            email_intro: |-
+              Доброго дня!,
+              В просторі співучасті %{space_title} розпочалось нове обговорення. Прочитайте його та зробіть свій внесок:
+            email_outro: Ви отримали це сповіщення, тому що ви стежите за простором співучасті %{space_title}. Ви можете відписатися від цих сповіщень, перейшовши за наведеним вище посиланням.
+            email_subject: У %{space_title} розпочалось нове обговорення
+            notification_title: <a href="%{space_path}">%{space_title} </a> розпочав обговорення у <a href="%{resource_path}">%{resource_title}</a>.
+          user_followers:
+            email_intro: |-
+              Доброго дня! 
+              %{author_name} %{author_nickname}, за яким ви стежите, розпочав нове обговорення. Прочитайте його та зробіть свій внесок:
+            email_outro: Ви отримали це сповіщення, тому що ви стежите за %{author_nickname}. Ви можете відписатися від цих сповіщень, перейшовши за наведеним вище посиланням.
+            email_subject: Нове обговорення, започатковане %{author_nickname}
+            notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> розпочав обговорення <a href="%{resource_path}">%{resource_title}</a>.
+        creation_disabled:
+          email_intro: 'В %{participatory_space_title} вже не можна починати обговорення. Ви можете взяти участь у вже започаткованих обговореннях на сторінці:'
+          email_outro: Ви отримали це сповіщення, тому що ви стежите за %{participatory_space_title}. Ви можете відписатися від цих сповіщень, перейшовши за наведеним вище посиланням.
+          email_subject: У %{participatory_space_title} вимкнено започаткування обговорень
+          notification_title: Тепер в <a href="%{participatory_space_url}">%{participatory_space_title}</a> вимкнено започаткування обговорень
+        creation_enabled:
+          email_intro: 'Тепер в %{participatory_space_title} з''явилась можливість започатковувати нові обговорення! Почніть брати участь зі сторінки:'
+          email_outro: Ви отримали це сповіщення, тому що ви стежите за %{participatory_space_title}. Ви можете відписатися від цих сповіщень, перейшовши за наведеним вище посиланням.
+          email_subject: В %{participatory_space_title} почалось обговорення
+          notification_title: Тепер ви можете започатковувати <a href="%{resource_path}">нові обговорення</a> в <a href="%{participatory_space_url}">%{participatory_space_title}</a>

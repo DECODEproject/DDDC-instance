@@ -1,0 +1,134 @@
+it:
+  activemodel:
+    attributes:
+      dpetition:
+        category_id: Categoria
+        decidim_category_id: Categoria
+        description: Descrizione
+        end_time: Finisce a
+        information_updates: Aggiornamenti delle informazioni
+        instructions: Istruzioni per partecipare
+        start_time: Inizia a
+        title: Titolo
+        user_group_id: Crea dibattito come
+    models:
+      decidim/dpetitions/create_dpetition_event: Discussione
+      decidim/dpetitions/creation_disabled_event: Discussioni disabilitate
+      decidim/dpetitions/creation_enabled_event: Discussioni abilitate
+  activerecord:
+    models:
+      decidim/dpetitions/dpetition:
+        one: Discussione
+        other: dibattiti
+  decidim:
+    components:
+      dpetitions:
+        actions:
+          create: Creare
+        name: dibattiti
+        settings:
+          global:
+            announcement: Annuncio
+            comments_enabled: Commenti abilitati
+          step:
+            announcement: Annuncio
+            comments_blocked: Commenti bloccati
+            creation_enabled: Creazione di dibattiti da parte degli utenti abilitati
+    dpetitions:
+      actions:
+        confirm_destroy: Sei sicuro?
+        destroy: Elimina
+        edit: modificare
+        new: Nuovo %{name}
+        title: Azioni
+      admin:
+        dpetitions:
+          create:
+            invalid: C'è stato un problema durante la creazione del dibattito.
+            success: Dibattito creato con successo.
+          destroy:
+            success: Dibattito cancellato con successo.
+          edit:
+            title: Modifica dibattito
+            update: Aggiornamento del dibattito
+          index:
+            title: dibattiti
+          new:
+            create: Crea dibattito
+            title: Nuovo dibattito
+          update:
+            invalid: C'è stato un problema durante l'aggiornamento di questo dibattito.
+            success: Dibattito aggiornato con successo.
+        models:
+          dpetition:
+            name: Discussione
+      admin_log:
+        dpetition:
+          create: "%{user_name} ha creato il dibattito %{resource_name} sullo spazio %{space_name}"
+          update: "%{user_name} ha aggiornato il dibattito %{resource_name} sullo spazio %{space_name}"
+      dpetitions:
+        count:
+          dpetitions_count:
+            one: "%{count} dibattito"
+            other: "%{count} dibattiti"
+        create:
+          invalid: C'è stato un problema durante la creazione del dibattito.
+          success: Dibattito creato con successo.
+        dpetition:
+          participate: Partecipare
+        filters:
+          all: Tutti
+          category: Categoria
+          category_prompt: Seleziona una categoria
+          citizens: cittadini
+          official: Ufficiale
+          origin: Origine
+          search: Ricerca
+        filters_small_view:
+          close_modal: Chiudi modale
+          filter: Filtro
+          filter_by: Filtra per
+          unfold: spiegare
+        index:
+          new_dpetition: Nuovo dibattito
+        new:
+          back: Indietro
+          create: Creare
+          select_a_category: Si prega di selezionare una categoria
+          title: Nuovo dibattito
+        share:
+          close_window: Chiudi la finestra
+          share: Condividere
+          share_link: Condividi il link
+      models:
+        dpetition:
+          fields:
+            end_time: Data di fine
+            official_dpetition: Dibattito ufficiale
+            start_time: Data d'inizio
+            title: Titolo
+    events:
+      dpetitions:
+        create_dpetition_event:
+          space_followers:
+            email_intro: |-
+              Salve, è stato creato un nuovo dibattito sullo spazio partecipativo %{space_title}, verificarlo e contribuire:
+            email_outro: Hai ricevuto questa notifica perché stai seguendo lo spazio partecipativo %{space_title}. È possibile interrompere la ricezione di notifiche seguendo il collegamento precedente.
+            email_subject: Nuovo dibattito su %{space_title}
+            notification_title: Il dibattito <a href="%{resource_path}">%{resource_title}</a> è stato creato su <a href="%{space_path}">%{space_title}</a>.
+          user_followers:
+            email_intro: |-
+              Ciao, %{author_name} %{author_nickname}, chi stai seguendo, ha creato un nuovo dibattito, dai un'occhiata e dai:
+            email_outro: Hai ricevuto questa notifica perché stai seguendo %{author_nickname}. È possibile interrompere la ricezione di notifiche seguendo il collegamento precedente.
+            email_subject: Nuovo dibattito di %{author_nickname}
+            notification_title: Il dibattito <a href="%{resource_path}">%{resource_title}</a> è stato creato da <a href="%{author_path}">%{author_name} %{author_nickname}</a>.
+        creation_disabled:
+          email_intro: 'La creazione del dibattito non è più attiva in %{participatory_space_title}. Puoi ancora partecipare ai dibattiti aperti da questa pagina:'
+          email_outro: Hai ricevuto questa notifica perché stai seguendo %{participatory_space_title}. È possibile interrompere la ricezione di notifiche seguendo il collegamento precedente.
+          email_subject: Creazione del dibattito disabilitata in %{participatory_space_title}
+          notification_title: La creazione del dibattito è ora disabilitata in <a href="%{participatory_space_url}">%{participatory_space_title}</a>
+        creation_enabled:
+          email_intro: 'Ora puoi iniziare nuovi dibattiti su %{participatory_space_title}! Inizia a partecipare a questa pagina:'
+          email_outro: Hai ricevuto questa notifica perché stai seguendo %{participatory_space_title}. È possibile interrompere la ricezione di notifiche seguendo il collegamento precedente.
+          email_subject: Discussioni ora disponibili in %{participatory_space_title}
+          notification_title: Ora puoi iniziare <a href="%{resource_path}">nuovi dibattiti</a> in <a href="%{participatory_space_url}">%{participatory_space_title}</a>

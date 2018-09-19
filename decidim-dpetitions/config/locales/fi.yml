@@ -1,0 +1,135 @@
+fi:
+  activemodel:
+    attributes:
+      dpetition:
+        category_id: Kategoria
+        decidim_category_id: Kategoria
+        description: Kuvaus
+        end_time: Päättymisaika
+        information_updates: Tietojen päivitykset
+        instructions: Osallistumisohjeet
+        start_time: Alkamisaika
+        title: Otsikko
+        user_group_id: Luo keskustelu käyttäjänä
+    models:
+      decidim/dpetitions/create_dpetition_event: Keskustelu
+      decidim/dpetitions/creation_disabled_event: Keskustelut poistettu käytöstä
+      decidim/dpetitions/creation_enabled_event: Keskustelut käytössä
+  activerecord:
+    models:
+      decidim/dpetitions/dpetition:
+        one: Keskustelu
+        other: keskustelut
+  decidim:
+    components:
+      dpetitions:
+        actions:
+          create: Luo
+        name: keskustelut
+        settings:
+          global:
+            announcement: Ilmoitus
+            comments_enabled: Kommentointi käytössä
+          step:
+            announcement: Ilmoitus
+            comments_blocked: Kommentointi estetty
+            creation_enabled: Keskustelujen luominen käyttäjien toimesta sallittu
+    dpetitions:
+      actions:
+        confirm_destroy: Oletko varma?
+        destroy: Poista
+        edit: Muokkaa
+        new: Uusi %{name}
+        title: Toiminnot
+      admin:
+        dpetitions:
+          create:
+            invalid: Keskustelua luotaessa tapahtui virhe.
+            success: Keskustelu luotu onnistuneesti.
+          destroy:
+            success: Keskustelu poistettu onnistuneesti.
+          edit:
+            title: Muokkaa keskustelua
+            update: Päivitä keskustelu
+          index:
+            title: Keskustelut
+          new:
+            create: Luo keskustelu
+            title: Uusi keskustelu
+          update:
+            invalid: Keskustelun päivittämisessä tapahtui virhe.
+            success: Keskustelu päivitetty onnistuneesti.
+        models:
+          dpetition:
+            name: Keskustelu
+      admin_log:
+        dpetition:
+          create: "%{user_name} loi keskustelun %{resource_name} tilaan %{space_name}"
+          update: "%{user_name} päivitti keskustelun %{resource_name} tilassa %{space_name}"
+      dpetitions:
+        count:
+          dpetitions_count:
+            one: "%{count} keskustelu"
+            other: "%{count} keskustelua"
+        create:
+          invalid: Luotaessa keskustelua tapahtui virhe.
+          success: Keskustelu luotu onnistuneesti.
+        dpetition:
+          participate: Osallistu
+        filters:
+          all: Kaikki
+          category: Kategoria
+          category_prompt: Valitse kategoria
+          citizens: Kansalaiset
+          official: Virallinen
+          origin: Alkuperä
+          search: Hae
+        filters_small_view:
+          close_modal: Sulje ikkuna
+          filter: Suodata
+          filter_by: Suodata
+          unfold: Avaa
+        index:
+          new_dpetition: Uusi keskustelu
+        new:
+          back: Takaisin
+          create: Luo
+          select_a_category: Valitse kategoria
+          title: Uusi keskustelu
+        share:
+          close_window: Sulje ikkuna
+          share: Jaa
+          share_link: Jaa linkki
+      models:
+        dpetition:
+          fields:
+            end_time: Päättymispäivä
+            official_dpetition: Virallinen keskustelu
+            start_time: Aloituspäivämäärä
+            title: Otsikko
+    events:
+      dpetitions:
+        create_dpetition_event:
+          space_followers:
+            email_intro: |-
+              Hei,
+              Uusi keskustelu on luotu osallistumistilaan %{space_title}. Tutustu ja osallistu siihen:
+            email_outro: Olet saanut tämän ilmoituksen, koska seuraat osallistumistilaa %{space_title}. Voit lopettaa ilmoitusten vastaanottamisen edellisen linkin kautta.
+            email_subject: Uusi keskustelu kohdassa %{space_title}
+            notification_title: Keskustelu aiheesta <a href="%{resource_path}">%{resource_title}</a> luotiin kohtaan <a href="%{space_path}">%{space_title}</a>.
+          user_followers:
+            email_intro: |-
+              Hei, %{author_name} %{author_nickname}, jota seuraat, on luonut uuden keskustelun, tutustu ja osallistu siihen:
+            email_outro: Olet saanut tämän ilmoituksen, koska seuraat käyttäjää %{author_nickname}. Voit lopettaa ilmoitusten vastaanottamisen edellisen linkin kautta.
+            email_subject: Uusi keskustelu käyttäjältä %{author_nickname}
+            notification_title: Käyttäjä <a href="%{author_path}">%{author_name} %{author_nickname}</a> loi keskustelun <a href="%{resource_path}">%{resource_title}</a>.
+        creation_disabled:
+          email_intro: 'Keskustelujen luominen ei ole enää käytössä kohdassa %{participatory_space_title}. Voit silti osallistua avattuihin keskusteluihin tämän sivun kautta:'
+          email_outro: Olet saanut tämän ilmoituksen, koska seuraat kohtaa %{participatory_space_title}. Voit lopettaa ilmoitusten vastaanottamisen edellisen linkin kautta.
+          email_subject: Keskustelujen luominen on poistettu käytöstä kohdassa %{participatory_space_title}
+          notification_title: Keskustelujen luominen on nyt poistettu käytöstä kohdassa <a href="%{participatory_space_url}">%{participatory_space_title}</a>
+        creation_enabled:
+          email_intro: 'Nyt voit aloittaa uusia keskusteluja kohdassa %{participatory_space_title}! Aloita osallistuminen tällä sivulla:'
+          email_outro: Olet saanut tämän ilmoituksen, koska seuraat %{participatory_space_title}. Voit lopettaa ilmoitusten vastaanottamisen edellisen linkin kautta.
+          email_subject: Keskusteluja nyt käyettävissä kohdassa %{participatory_space_title}
+          notification_title: Voit nyt aloittaa <a href="%{resource_path}">uusia keskusteluja</a>kohdassa <a href="%{participatory_space_url}">%{participatory_space_title}</a>
