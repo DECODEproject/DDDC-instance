@@ -14,6 +14,7 @@ gem "uglifier", "~> 4.1"
 gem "faker", "~> 1.8"
 gem "daemons"
 gem "delayed_job_active_record"
+gem "decidim-petitions", path: "."
 
 group :development, :test do
   gem "byebug", "~> 10.0", platform: :mri
