@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-divider">
+    <h2 class="card-title">
+      <%= t(".title") %>
+      <%= link_to t("actions.new", scope: "decidim.petitions"), new_petition_path, class: "button tiny button--title" %>
+    </h2>
+  </div>
+  <div class="card-section">
+    <div class="table-scroll">
+      <table class="table-list">
+        <thead>
+          <tr>
+            <th><%= t("models.petition.fields.title", scope: "decidim.petitions") %></th>
+            <th class="center"><%= t("models.petition.fields.closing_date", scope: "decidim.petitions") %></th>
+            <th class="center"><%= t("models.petition.fields.signatures", scope: "decidim.petitions") %></th>
+            <th class="actions"><%= t("actions.title", scope: "decidim.petitions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% petitions.each do |petition| %>
+            <tr data-id="<%= petition.id %>">
+              <td>
+                <%= translated_attribute(petition.title) %>
+              </td>
+              <td class="center">
+                2018-12-28
+              </td>
+              <td class="center">
+                0
+              </td>
+              <td class="table-list__actions">
+                <% if allowed_to? :update, :petition, petition: petition %>
+                  <%= icon_link_to "pencil",
+                          edit_petition_path(petition), t("actions.edit", scope: "decidim.petitions"),
+                          class: "action-icon--edit" %>
+                <% end %>
+                <% if allowed_to? :destroy, :petition, petition: petition %>
+                  <%= icon_link_to "circle-x",
+                          petition_path(petition),
+                          t("actions.destroy", scope: "decidim.petitions"),
+                          method: :delete,
+                          class: "action-icon--remove",
+                          data: { confirm: t("actions.confirm_destroy", scope: "decidim.petitions") }
+                  %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate petitions, theme: "decidim" %>
+    </div>
+  </div>
+</div>
