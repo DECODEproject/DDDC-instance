@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_06_093518) do
+ActiveRecord::Schema.define(version: 2018_09_26_133757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -680,6 +680,23 @@ ActiveRecord::Schema.define(version: 2018_09_06_093518) do
     t.index ["privatable_to_type", "privatable_to_id"], name: "space_privatable_to_privatable_id"
   end
 
+  create_table "decidim_petitions_petitions", force: :cascade do |t|
+    t.jsonb "title"
+    t.jsonb "summary"
+    t.jsonb "description"
+    t.boolean "open", default: false
+    t.bigint "decidim_organization_id"
+    t.integer "decidim_author_id"
+    t.bigint "decidim_component_id"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["decidim_author_id"], name: "index_decidim_petitions_petitions_on_decidim_author_id"
+    t.index ["decidim_component_id"], name: "index_decidim_petitions_petitions_on_decidim_component_id"
+    t.index ["decidim_organization_id"], name: "index_decidim_petition_on_decidim_organization_id"
+    t.index ["published_at"], name: "index_decidim_petitions_petitions_on_published_at"
+  end
+
   create_table "decidim_proposals_proposal_endorsements", force: :cascade do |t|
     t.bigint "decidim_proposal_id", null: false
     t.bigint "decidim_author_id", null: false
@@ -1072,6 +1089,7 @@ ActiveRecord::Schema.define(version: 2018_09_06_093518) do
   add_foreign_key "decidim_newsletters", "decidim_users", column: "author_id"
   add_foreign_key "decidim_participatory_process_steps", "decidim_participatory_processes"
   add_foreign_key "decidim_participatory_processes", "decidim_organizations"
+  add_foreign_key "decidim_petitions_petitions", "decidim_organizations"
   add_foreign_key "decidim_scope_types", "decidim_organizations"
   add_foreign_key "decidim_scopes", "decidim_organizations"
   add_foreign_key "decidim_scopes", "decidim_scope_types", column: "scope_type_id"
