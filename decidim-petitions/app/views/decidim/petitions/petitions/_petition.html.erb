@@ -1,0 +1,20 @@
+<%# <%= card_for petition, from: petition %1> %>
+<div id="petition" class="column">
+  <article class="card card--petition">
+    <div class="card__content">
+      <div class="card__header">
+        
+        <%= link_to translated_attribute(petition.title), "#", class: "card__title" %></div>
+      <div class="card__content"></div>
+      <div></div>
+    </div>
+    <div class="card__footer">
+      <div class="card__support">
+        <div class="progress__bar">
+          <span class="progress__bar__number"></span>
+          <span class="progress__bar__text"></span>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>

@@ -1,0 +1,53 @@
+---
+en:
+  decidim:
+    pages:
+      home:
+        statistics:
+          petitions_count: Petitions
+    petitions:
+      petitions:
+        count:
+          petitions_count: "%{count} Petitions"
+      index:
+        title: Petitions
+      actions:
+        new: New
+        edit: Edit
+        destroy: Destroy
+        confirm_destroy: Are you sure to destroy this petition?
+        title: Actions
+      admin:
+        model:
+          components:
+            summary: Summary
+            description: Description
+        petitions:
+          count:
+            petitions_count: "%{total_count} Petitions"
+          edit:
+            title: Edit Petition
+            save: Save
+          new:
+            title: New Petition
+            create: Create
+          index:
+            title: Petitions
+            votes: Votes
+          destroy:
+            success: Petition deleted
+      models:
+        petition:
+          fields:
+            title: Title
+            signatures: Signatures
+            closing_date: Closing date
+    components:
+      petitions:
+        name: Petitions
+        settings:
+          global:
+            chainspace_url: Chainspace API URL
+          step:
+            announcement: Announcement
+            votes_enabled: Votes enabled
