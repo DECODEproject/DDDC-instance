@@ -4,7 +4,10 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-gem "decidim", "0.13.1"
+
+DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "master" }
+
+gem "decidim", DECIDIM_VERSION
 # gem "decidim-consultations", "0.13.1"
 # gem "decidim-initiatives", "0.13.1"
 
@@ -19,7 +22,7 @@ gem "decidim-petitions", path: "."
 group :development, :test do
   gem "byebug", "~> 10.0", platform: :mri
 
-  gem "decidim-dev", "0.13.1"
+  gem "decidim-dev", DECIDIM_VERSION
 end
 
 group :development do
