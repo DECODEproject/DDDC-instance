@@ -29,9 +29,8 @@ Decidim.register_component(:petitions) do |component|
   end
 
   component.register_resource(:petition) do |resource|
-    # Register a optional resource that can be references from other resources.
     resource.model_class_name = "Decidim::Petitions::Petition"
-    # resource.template = "decidim/petitions/some_resources/linked_some_resources"
+    resource.card = "decidim/petitions/petition"
   end
 
   component.register_stat :petitions_count, primary: true, priority: Decidim::StatsRegistry::MEDIUM_PRIORITY do |components, _start_at, _end_at|

@@ -7,6 +7,11 @@ en:
           petitions_count: Petitions
     petitions:
       petitions:
+        petition:
+          participate: Participate
+          open_wallet: Open Wallet
+          summary: Summary
+          description: Description
         count:
           petitions_count: "%{count} Petitions"
       index:
@@ -22,6 +27,7 @@ en:
           components:
             summary: Summary
             description: Description
+            json_schema: JSON Schema
         petitions:
           count:
             petitions_count: "%{total_count} Petitions"
