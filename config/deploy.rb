@@ -9,7 +9,7 @@ append :linked_files, "config/database.yml", ".rbenv-vars"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor/bundle"
 
 set :rbenv_type, :user
-set :rbenv_ruby, "2.4.2"
+set :rbenv_ruby, "2.5.1"
 set :rbenv_path, "/home/ruby-data/.rbenv"
 set :delayed_job_workers, 1
 set :passenger_restart_with_touch, true
