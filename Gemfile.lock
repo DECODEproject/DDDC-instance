@@ -178,6 +178,8 @@ PATH
   remote: .
   specs:
     decidim-petitions (0.15.0.dev)
+      cells-erb (~> 0.1.0)
+      cells-rails (~> 0.0.9)
       decidim-core (= 0.15.0.dev)
       rqrcode (~> 0.10)
 
