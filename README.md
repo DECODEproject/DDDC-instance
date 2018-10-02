@@ -1,22 +1,98 @@
-# DDDC
+# Digital Democracy and Data Commons for Barcelona
 
-Citizen Participation and Open Government application.
+This is the open-source repository for DDDC, based on [Decidim](https://github.com/decidim/decidim),
+implementing the [DECODE](https://decodeproject.eu/) prototypes.
 
-This is the open-source repository for DDDC, based on [Decidim](https://github.com/decidim/decidim).
 
 ## Setting up the application
 
 You will need to do some steps before having the app working properly once you've deployed it:
 
-1. Open a Rails console in the server: `bundle exec rails console`
-2. Create a System Admin user:
-```ruby
-user = Decidim::System::Admin.new(email: <email>, password: <password>, password_confirmation: <password>)
-user.save!
+1. Clone this repository:
+```console
+git clone https://github.com/alabs/DDDC
 ```
-3. Visit `<your app url>/system` and login with your system admin credentials
-4. Create a new organization. Check the locales you want to use for that organization, and select a default locale.
-5. Set the correct default host for the organization, otherwise the app will not work properly. Note that you need to include any subdomain you might be using.
-6. Fill the rest of the form and submit it.
+2. Go to the directory:
+```console
+cd DDDC
+```
+3. Install the gems:
+```console
+bundle install
+```
+4. Set up the database. If you need you can change your settings using the environment variables from config/database.yml:
+```console
+rails db:create
+rails db:migrate
+rails db:seed
+```
+5. Start the web server:
+```console
+rails server
+```
 
-You're good to go!
+## About petitions module
+
+We implemented the DECODE prototypes based on a Decidim module. It's on the `decidim-petitions/` directory.
+
+### Configuring
+
+Go to the /admin, configure a new Participatory Process, add Petition component and configure a Petition.
+
+You can set up the Chainspace URI here.
+
+### Screenshots
+
+![](docs/decode-petitions-01.png)
+![](docs/decode-petitions-02.png)
+![](docs/decode-petitions-03.png)
+![](docs/decode-petitions-04.png)
+![](docs/decode-petitions-05.png)
+
+### GraphQL
+
+It's important to configure the JSON attributes so it's consumed by other apps from DECODE ecosystem:
+
+```json
+{
+  "mandatory": [
+    {
+      "predicate": "schema:addressLocality",
+      "object": "Barcelona",
+      "scope": "can-access",
+      "provenance": {
+        "url": "http://atlantis-decode.s3-website-eu-west-1.amazonaws.com"
+      }
+    }
+  ],
+  "optional": [
+    {
+      "predicate": "schema:dateOfBirth",
+      "object": "voter",
+      "scope": "can-access"
+    },
+    {
+      "predicate": "schema:gender",
+      "object": "voter",
+      "scope": "can-access"
+    }
+  ]
+}
+```
+
+To consume this data, you can do it on the GraphQL API:
+
+```graphql
+{
+  petition(id:"1") {
+    id,
+    title,
+    description,
+    author,
+    json_schema
+  }
+}
+```
+
+
+
