@@ -24,10 +24,11 @@ module Decidim
         attr_reader :form, :petition
 
         def update_petition!
-          post.update!(
+          petition.update!(
             title: form.title,
             summary: form.summary,
-            description: form.description
+            description: form.description,
+            json_schema: JSON.parse(form.json_schema)
           )
         end
       end

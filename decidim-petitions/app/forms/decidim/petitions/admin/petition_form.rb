@@ -9,6 +9,7 @@ module Decidim
         translatable_attribute :title, String
         translatable_attribute :summary, String
         translatable_attribute :description, String
+        attribute :json_schema, JSON
 
         mimic :petition
 

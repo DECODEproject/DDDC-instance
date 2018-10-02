@@ -3,6 +3,9 @@
 require "rails"
 require "decidim/core"
 require "decidim/petitions/query_extensions"
+require "cells/rails"
+require "cells-erb"
+require "cell/partial"
 
 module Decidim
   module Petitions
@@ -12,7 +15,7 @@ module Decidim
 
       routes do
         # Add engine routes here
-        # resources :petitions
+        resources :petitions, only: %i[index show]
         root to: "petitions#index"
       end
 
@@ -24,6 +27,11 @@ module Decidim
         Decidim::Api::QueryType.define do
           QueryExtensions.define(self)
         end
+      end
+
+      initializer "decidim_petitions.add_cells_view_path" do
+        Cell::ViewModel.view_paths << File.expand_path("#{Decidim::Petitions::Engine.root}/app/cells")
+        Cell::ViewModel.view_paths << File.expand_path("#{Decidim::Petitions::Engine.root}/app/views")
       end
     end
   end

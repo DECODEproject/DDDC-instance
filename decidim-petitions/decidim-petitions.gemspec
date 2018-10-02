@@ -19,5 +19,8 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,lib}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
 
   s.add_dependency "decidim-core", Decidim::Petitions.version
+
+  s.add_dependency "cells-erb", "~> 0.1.0"
+  s.add_dependency "cells-rails", "~> 0.0.9"
   s.add_dependency "rqrcode", "~> 0.10"
 end

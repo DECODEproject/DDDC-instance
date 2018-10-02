@@ -12,5 +12,8 @@
     <div class="row column">
       <%= form.translated :editor, :description, toolbar: :full, lines: 30, label: t("model.components.description", scope: "decidim.petitions.admin") %>
     </div>
+    <div class="row column">
+      <%= form.text_area :json_schema, toolbar: nil, rows: 30, label: t("model.components.json_schema", scope: "decidim.petitions.admin") %>
+    </div>
   </div>
 </div>

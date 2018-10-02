@@ -6,7 +6,7 @@ module Decidim
       name "Petition"
       description "The petitions"
       field :id, !types.ID, "Petition unique ID"
-      field :title, !types.String, "Petition Title"
+      field :title, JSONType, "Petition Title"
       field :author, !types.String, "Author name" do
         resolve ->(obj, _args, _ctx) { obj.author.name }
       end
@@ -14,7 +14,14 @@ module Decidim
         resolve ->(obj, _, _) { obj.organization.name }
       end
 
-      field :description, !types.String, "Description of the petition."
+      field :description, JSONType, "Description of the petition."
+      field :json_schema, JSONType, "Schema"
+    end
+
+    JSONType = GraphQL::ScalarType.define do
+      name "JSONType"
+      coerce_input -> (value) { JSON.parse(value) }
+      coerce_result -> (value) { value }
     end
   end
 end

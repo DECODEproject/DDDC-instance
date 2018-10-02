@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require "cell/partial"
+
 module Decidim
   module Petitions
-    class PetitionCell < Decidim::ModelView
+    class PetitionCell < Decidim::ViewModel
       include Cell::ViewModel::Partial
+      include PetitionCellsHelper
 
       def show
         cell card_size, model, options
@@ -13,14 +16,6 @@ module Decidim
 
       def card_size
         "decidim/petitions/petition_m"
-      end
-
-      def current_component
-        model.component
-      end
-
-      def current_participatory_space
-        model.component.participatory_space
       end
     end
   end

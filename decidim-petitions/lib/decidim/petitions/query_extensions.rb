@@ -10,7 +10,7 @@ module Decidim
           argument :id, !types.ID, "The petition ID"
 
           resolve lambda { |_obj, args, ctx|
-            Petition.find_by(id: args[:id], organization: ctx[:current_organization])
+            Petition.find_by(id: args[:id])
           }
         end
       end

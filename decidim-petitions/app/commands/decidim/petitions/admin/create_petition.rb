@@ -25,6 +25,7 @@ module Decidim
           @petition = Petition.create!(
             title: @form.title,
             summary: @form.summary,
+            json_schema: JSON.parse(@form.json_schema),
             description: @form.description,
             component: @form.current_component,
             decidim_author_id: @current_user.id
