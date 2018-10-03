@@ -19,8 +19,10 @@
         <div class="card__qr">
           <img src="<%= petition_qrcode(petition) %>" />
         </div>
+        <%= render partial: "votes_count" %>
         <div class="card__actions">
           <%= decodewallet_button(petition) %>
+          <%= expo_button(petition) %>
         </div>
       </div>
     </div>

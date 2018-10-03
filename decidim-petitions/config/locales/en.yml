@@ -9,9 +9,11 @@ en:
       petitions:
         petition:
           participate: Participate
-          open_wallet: Open Wallet
+          open_wallet: Sign with Decode App
+          open_expo: Sign with Expo
           summary: Summary
           description: Description
+          votes: Votes
         count:
           petitions_count: "%{count} Petitions"
       index:
