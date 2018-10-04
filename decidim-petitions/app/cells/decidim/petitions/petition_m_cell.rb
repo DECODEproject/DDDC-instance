@@ -16,7 +16,15 @@ module Decidim
       end
 
       def description
-        truncate(decidim_sanitize(translated_attribute(present(model).summary)), length: 100)
+        html_truncate(decidim_sanitize(translated_attribute(present(model).summary)), length: 100)
+      end
+
+      def progress_bar_progress
+        model.votes || 0
+      end
+
+      def progress_bar_total
+        model.votes || 0
       end
     end
   end

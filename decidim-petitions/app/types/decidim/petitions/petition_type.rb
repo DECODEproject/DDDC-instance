@@ -10,7 +10,7 @@ module Decidim
       field :author, !types.String, "Author name" do
         resolve ->(obj, _args, _ctx) { obj.author.name }
       end
-      field :votes, !types.Integer, "Petition votes"
+      field :votes, !types.Int, "Petition votes"
       field :submitted_to, !types.String, "Petition submitted to" do
         resolve ->(obj, _, _) { obj.organization.name }
       end
