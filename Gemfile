@@ -42,3 +42,14 @@ group :development do
   gem "ed25519"
   gem "bcrypt_pbkdf"
 end
+
+group :production do
+  gem 'passenger'
+  gem 'fog-aws'
+  gem 'dalli'
+  gem 'sendgrid-ruby'
+  gem 'newrelic_rpm'
+  gem 'lograge'
+  gem 'sentry-raven'
+  gem 'sidekiq'
+end

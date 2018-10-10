@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Decidim.configure do |config|
-  config.application_name = "My Application Name"
+  config.application_name = "Decidim DECODE"
   config.mailer_sender = "change-me@domain.org"
 
   # Change these lines to set your preferred locales
@@ -9,11 +9,11 @@ Decidim.configure do |config|
   config.available_locales = [:en, :ca, :es]
 
   # Geocoder configuration
-  # config.geocoder = {
-  #   static_map_url: "https://image.maps.cit.api.here.com/mia/1.6/mapview",
-  #   here_app_id: Rails.application.secrets.geocoder[:here_app_id],
-  #   here_app_code: Rails.application.secrets.geocoder[:here_app_code]
-  # }
+  config.geocoder = {
+    static_map_url: "https://image.maps.cit.api.here.com/mia/1.6/mapview",
+    here_app_id: Rails.application.secrets.geocoder[:here_app_id],
+    here_app_code: Rails.application.secrets.geocoder[:here_app_code]
+  }
 
   # Custom resource reference generator method
   # config.reference_generator = lambda do |resource, component|
@@ -41,6 +41,10 @@ Decidim.configure do |config|
   # take over user accounts.
   #
   config.enable_html_header_snippets = false
+
+  if ENV["HEROKU_APP_NAME"].present?
+    config.base_uploads_path = ENV["HEROKU_APP_NAME"] + "/"
+  end
 end
 
 Rails.application.config.i18n.available_locales = Decidim.available_locales
