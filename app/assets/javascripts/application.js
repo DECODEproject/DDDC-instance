@@ -14,3 +14,11 @@
 //= require activestorage
 //= require_tree .
 //= require decidim
+//
+
+$(document).ready(function() {
+  $('.section-heading').eq(1).css({"border-bottom": "10px solid #fff16e"});
+  $('.section-heading').eq(2).css({"border-bottom": "10px solid #33e986"});
+  $('.section-heading').eq(4).css({"border-bottom": "10px solid #fff16e"});
+  $('.section-heading').eq(5).css({"border-bottom": "10px solid #33e986"});
+});
