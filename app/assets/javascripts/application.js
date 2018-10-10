@@ -17,8 +17,15 @@
 //
 
 $(document).ready(function() {
-  $('.section-heading').eq(1).css({"border-bottom": "10px solid #fff16e"});
-  $('.section-heading').eq(2).css({"border-bottom": "10px solid #33e986"});
-  $('.section-heading').eq(4).css({"border-bottom": "10px solid #fff16e"});
-  $('.section-heading').eq(5).css({"border-bottom": "10px solid #33e986"});
+  $('.section-heading').eq(0).addClass('section-heading-1');
+  $('.section-heading').eq(1).addClass('section-heading-2');
+  $('.section-heading').eq(2).addClass('section-heading-3');
+  $('.section-heading').eq(3).addClass('section-heading-4');
+  $('.section-heading').eq(4).addClass('section-heading-5');
+  $('.section-heading').eq(5).addClass('section-heading-1');
+  $('.section-heading').eq(6).addClass('section-heading-2');
+  $('.section-heading').eq(7).addClass('section-heading-3');
+  $('.section-heading').eq(8).addClass('section-heading-4');
+  $('.section-heading').eq(9).addClass('section-heading-5');
+  $('.section-heading').eq(10).addClass('section-heading-1');
 });
