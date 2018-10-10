@@ -6,6 +6,8 @@ implementing the [DECODE](https://decodeproject.eu/) prototypes.
 
 ## Setting up the application
 
+### Development
+
 You will need to do some steps before having the app working properly once you've deployed it:
 
 1. Clone this repository:
@@ -30,6 +32,14 @@ rails db:seed
 ```console
 rails server
 ```
+
+### Production
+
+You should deploy it as other Ruby on Rails applications, using Capistrano or other methods for deployment that you prefer.
+
+As a dependency it needs the [decidim-decode-connector](https://github.com/DECODEproject/decidim-decode-connector) on the same server.
+
+TODO: how to configure the local route on Decidim configuration.
 
 ## About petitions module
 
