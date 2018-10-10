@@ -1,13 +1,15 @@
+require "sidekiq/web"
 Rails.application.routes.draw do
   match "/users/invitations", to: redirect("/404"), via: [:get, :post]
   match "/users/invitations/*", to: redirect("/404"), via: [:get, :post]
   match "/account/invitations", to: redirect("/404"), via: [:get, :post]
   match "/account/invitations/*", to: redirect("/404"), via: [:get, :post]
+  
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
-  if Rails.env.development?
-	mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 
   mount Decidim::Core::Engine => '/'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

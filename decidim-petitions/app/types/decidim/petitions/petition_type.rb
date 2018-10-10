@@ -12,17 +12,21 @@ module Decidim
       end
       field :votes, !types.Int, "Petition votes"
       field :submitted_to, !types.String, "Petition submitted to" do
-        resolve ->(obj, _, _) { obj.organization.name }
+        resolve ->(obj, _args, _ctx) { obj.organization.name }
       end
 
       field :description, JSONType, "Description of the petition."
       field :json_schema, JSONType, "Schema"
+
+      field :image, !types.String, "Petition image square" do
+        resolve ->(obj, _args, _ctx) { obj.image.url(:square) }
+      end
     end
 
     JSONType = GraphQL::ScalarType.define do
       name "JSONType"
-      coerce_input -> (value) { JSON.parse(value) }
-      coerce_result -> (value) { value }
+      coerce_input ->(value, _ctx) { JSON.parse(value) }
+      coerce_result ->(value, _ctx) { value }
     end
   end
 end

@@ -8,7 +8,7 @@ module Decidim
       private
 
       def has_image?
-        false
+        true
       end
 
       def body
@@ -17,6 +17,10 @@ module Decidim
 
       def description
         html_truncate(decidim_sanitize(translated_attribute(present(model).summary)), length: 100)
+      end
+
+      def resource_image_path
+        model.image.url
       end
 
       def progress_bar_progress
