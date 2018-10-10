@@ -8,7 +8,7 @@ module Decidim
       end
 
       version :square do
-        process resize_to_fit: [120, 120]
+        process resize_to_fill: [80, 80]
       end
     end
   end
