@@ -6,6 +6,8 @@ module Decidim
       include Decidim::Publicable
       include Decidim::Resourceable
 
+      mount_uploader :image, Decidim::Petitions::ImageUploader
+
       def body
         title
       end
