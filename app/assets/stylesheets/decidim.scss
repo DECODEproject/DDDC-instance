@@ -1,7 +1,14 @@
 // // Variables
 // 
-// $primary: #ef604d;
-// $secondary: #599aa6;
+$primary: #00b1b0;
+$secondary: #e4701e;
+
+$decode-1: $primary;
+$decode-2: $secondary;
+$decode-3: #33e986;
+$decode-4: #fff16e;
+$decode-5: #e37fd2;
+
 // $success: #57d685;
 // $warning: #ffae00;
 // $alert: #ec5840;
@@ -16,3 +23,98 @@
 // $google: #dd4b39;
 
 @import "decidim/application";
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+
+body, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  font-family: "Montserrat","Century Gothic",Verdana,Helvetica,Arial,sans-serif;
+  font-size: 0.9rem;
+}
+
+.title-bar {
+  padding: 40px;
+}
+
+.navbar, .title-bar,
+.topbar__dropmenu > ul > li > a,
+.main-nav__link a,
+.topbar__user__login a,
+.card__link,
+.topbar__edit__link a,
+.topbar__dropmenu .is-dropdown-submenu li a {
+  background: white;
+  color: black;
+}
+
+//.topbar__search svg .topbar__search input, .topbar__search input:focus {
+
+.topbar__search input, .topbar__search input:focus {
+  background: white;
+  border-color: lightgrey;
+  border-style: ridge;
+  border-width: 1px;
+  color: black;
+}
+
+.topbar__search input::placeholder {
+  color: black;
+}
+
+.main-nav__link a:hover {
+  color: black;
+  box-shadow: inset 0 4px 0 0 $secondary;
+}
+
+.section-heading {
+  text-transform: inherit;
+  font-size: 1.3rem;
+  display: inline-block;
+  //.section-heading extra styling for the borders on JavaScript
+  border-bottom: 10px solid $primary;
+}
+
+.section-heading-1 {
+  border-bottom-color: $decode-1;
+}
+
+.section-heading-2 {
+  border-bottom-color: $decode-2;
+}
+
+.section-heading-3 {
+  border-bottom-color: $decode-3;
+}
+
+.section-heading-4 {
+  border-bottom-color: $decode-4;
+}
+
+.section-heading-5 {
+  border-bottom-color: $decode-5;
+}
+
+
+.section-heading::before {
+  width: 0px;
+  height: 0px;
+  background-color: white;
+  margin: 0;
+}
+
+.title-bar{
+  @include breakpoint(smallmedium down){
+    border-top: 2.125rem solid white;
+  }
+}
+
+
+.off-canvas {
+  background-color: white;
+}
+
+.usermenu-off-canvas-holder .usermenu-off-canvas a,
+.usermenu-off-canvas-holder .usermenu-off-canvas a:hover,
+.off-canvas .close-button {
+  color: black;
+}
