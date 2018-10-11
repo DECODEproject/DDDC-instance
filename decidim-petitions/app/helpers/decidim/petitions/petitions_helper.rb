@@ -34,12 +34,16 @@ module Decidim
         ).to_s)
       end
 
+      def exp_url(petition)
+        "//exp.host/@decode-barcelona/decode-walletapp?release-channel=production&mobile=true&decidimAPIUrl=#{decidim_api.root_url}&petitionId=#{petition.id}"
+      end
+
       def decode_url(petition)
-        "decodewallet://exp.host/@decode-barcelona/decode-walletapp?release-channel=production&mobile=true&decidimAPIUrl=#{petition_url(petition.id)}"
+        "decodewallet:#{exp_url(petition)}"
       end
 
       def expo_url(petition)
-        "exp://exp.host/@decode-barcelona/decode-walletapp?release-channel=production&mobile=true&decidimAPIUrl=#{petition_url(petition.id)}"
+        "exp:#{exp_url(petition)}"
       end
     end
   end
