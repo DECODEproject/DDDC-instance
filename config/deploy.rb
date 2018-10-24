@@ -11,5 +11,5 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 set :rbenv_type, :user
 set :rbenv_ruby, "2.5.1"
 set :rbenv_path, "/home/ruby-data/.rbenv"
-set :delayed_job_workers, 1
 set :passenger_restart_with_touch, true
+set :pty,  false

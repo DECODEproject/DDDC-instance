@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_11_093852) do
+ActiveRecord::Schema.define(version: 2018_10_24_103633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -73,12 +73,14 @@ ActiveRecord::Schema.define(version: 2018_10_11_093852) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "version_id"
+    t.string "visibility", default: "admin-only"
     t.index ["created_at"], name: "index_decidim_action_logs_on_created_at"
     t.index ["decidim_component_id"], name: "index_action_logs_on_component_id"
     t.index ["decidim_organization_id"], name: "index_action_logs_on_organization_id"
     t.index ["decidim_user_id"], name: "index_action_logs_on_user_id"
     t.index ["participatory_space_type", "participatory_space_id"], name: "index_action_logs_on_space_type_and_id"
     t.index ["resource_type", "resource_id"], name: "index_action_logs_on_resource_type_and_id"
+    t.index ["visibility"], name: "index_decidim_action_logs_on_visibility"
   end
 
   create_table "decidim_area_types", force: :cascade do |t|
@@ -347,6 +349,15 @@ ActiveRecord::Schema.define(version: 2018_10_11_093852) do
     t.index ["manifest_name"], name: "index_decidim_content_blocks_on_manifest_name"
     t.index ["published_at"], name: "index_decidim_content_blocks_on_published_at"
     t.index ["scope"], name: "index_decidim_content_blocks_on_scope"
+  end
+
+  create_table "decidim_continuity_badge_statuses", force: :cascade do |t|
+    t.integer "current_streak", default: 0, null: false
+    t.integer "integer", default: 0, null: false
+    t.date "last_session_at", null: false
+    t.string "subject_type", null: false
+    t.bigint "subject_id", null: false
+    t.index ["subject_type", "subject_id"], name: "decidim_continuity_statuses_subject"
   end
 
   create_table "decidim_debates_debates", id: :serial, force: :cascade do |t|
@@ -640,6 +651,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_093852) do
     t.string "highlighted_content_banner_action_url"
     t.string "highlighted_content_banner_image"
     t.datetime "tos_version"
+    t.boolean "badges_enabled", default: false, null: false
     t.index ["host"], name: "index_decidim_organizations_on_host", unique: true
     t.index ["name"], name: "index_decidim_organizations_on_name", unique: true
   end
@@ -1043,23 +1055,11 @@ ActiveRecord::Schema.define(version: 2018_10_11_093852) do
     t.integer "decidim_user_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role", default: "requested", null: false
     t.index ["decidim_user_group_id"], name: "index_decidim_user_group_memberships_on_decidim_user_group_id"
     t.index ["decidim_user_id", "decidim_user_group_id"], name: "decidim_user_group_memberships_unique_user_and_group_ids", unique: true
     t.index ["decidim_user_id"], name: "index_decidim_user_group_memberships_on_decidim_user_id"
-  end
-
-  create_table "decidim_user_groups", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
-    t.string "document_number", null: false
-    t.string "phone", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "avatar"
-    t.datetime "rejected_at"
-    t.integer "decidim_organization_id", null: false
-    t.datetime "verified_at"
-    t.index ["decidim_organization_id", "document_number"], name: "index_decidim_user_groups_document_number_on_organization_id", unique: true
-    t.index ["decidim_organization_id", "name"], name: "index_decidim_user_groups_names_on_organization_id", unique: true
+    t.index ["role", "decidim_user_group_id"], name: "decidim_group_membership_one_creator_per_group", unique: true, where: "((role)::text = 'creator'::text)"
   end
 
   create_table "decidim_users", id: :serial, force: :cascade do |t|
@@ -1105,30 +1105,17 @@ ActiveRecord::Schema.define(version: 2018_10_11_093852) do
     t.datetime "newsletter_notifications_at"
     t.datetime "officialized_at"
     t.jsonb "officialized_as"
+    t.string "type", null: false
+    t.jsonb "extended_data", default: {}
     t.index ["confirmation_token"], name: "index_decidim_users_on_confirmation_token", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_users_on_decidim_organization_id"
-    t.index ["email", "decidim_organization_id"], name: "index_decidim_users_on_email_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false))"
+    t.index ["email", "decidim_organization_id"], name: "index_decidim_users_on_email_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false) AND ((type)::text = 'Decidim::User'::text))"
     t.index ["invitation_token"], name: "index_decidim_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_decidim_users_on_invitations_count"
     t.index ["invited_by_id"], name: "index_decidim_users_on_invited_by_id"
     t.index ["nickname", "decidim_organization_id"], name: "index_decidim_users_on_nickame_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false))"
     t.index ["officialized_at"], name: "index_decidim_users_on_officialized_at"
     t.index ["reset_password_token"], name: "index_decidim_users_on_reset_password_token", unique: true
-  end
-
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer "priority", default: 0, null: false
-    t.integer "attempts", default: 0, null: false
-    t.text "handler", null: false
-    t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string "locked_by"
-    t.string "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|

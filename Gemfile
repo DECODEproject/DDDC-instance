@@ -15,8 +15,6 @@ gem "bootsnap", "~> 1.3"
 gem "puma", "~> 3.0"
 gem "uglifier", "~> 4.1"
 gem "faker", "~> 1.8"
-gem "daemons"
-gem "delayed_job_active_record"
 gem "decidim-petitions", path: "."
 
 group :development, :test do
@@ -38,7 +36,7 @@ group :development do
   gem "capistrano-passenger"
   gem "capistrano-rails", "1.1.8", require: false
   gem "capistrano-rbenv"
-  gem "capistrano3-delayed-job", "~> 1.0"
+  gem "capistrano-sidekiq", github: "seuros/capistrano-sidekiq"
   gem "ed25519"
   gem "bcrypt_pbkdf"
 end
