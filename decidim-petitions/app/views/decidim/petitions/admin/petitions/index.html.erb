@@ -33,6 +33,21 @@
                   <%= icon_link_to "pencil",
                           edit_petition_path(petition), t("actions.edit", scope: "decidim.petitions"),
                           class: "action-icon--edit" %>
+                  <% if petition.open? %>
+                    <%= icon_link_to "lock-locked",
+                          deactivate_petition_path(petition),
+                          t("actions.close", scope: "decidim.petitions"),
+                          method: :post,
+                          data: { confirm: t("actions.confirm_close", scope: "decidim.petitions") },
+                          class: "action-icon--activate" %>
+                  <% else %>
+                    <%= icon_link_to "lock-unlocked",
+                          activate_petition_path(petition), 
+                          t("actions.open", scope: "decidim.petitions"),
+                          method: :post,
+                          data: { confirm: t("actions.confirm_open", scope: "decidim.petitions") },
+                          class: "action-icon--activate" %>
+                  <% end %>
                 <% end %>
                 <% if allowed_to? :destroy, :petition, petition: petition %>
                   <%= icon_link_to "circle-x",

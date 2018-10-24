@@ -1,61 +1,54 @@
 ---
 en:
   decidim:
-    pages:
-      home:
-        statistics:
-          petitions_count: Petitions
     petitions:
-      petitions:
-        petition:
-          participate: Participate
-          open_wallet: Sign with Decode App
-          open_expo: Sign with Expo
-          summary: Summary
-          description: Description
-          votes: Votes
-        count:
-          petitions_count: "%{count} Petitions"
-      index:
-        title: Petitions
       actions:
-        new: New
-        edit: Edit
-        destroy: Destroy
+        close: Close petition
+        confirm_close: Are you sure to close this petition?
         confirm_destroy: Are you sure to destroy this petition?
+        confirm_open: Are you sure to open this petition?
+        destroy: Destroy
+        edit: Edit
+        new: New
+        open: Open petition
         title: Actions
       admin:
         model:
           components:
-            summary: Summary
             description: Description
             json_schema: JSON Schema
+            summary: Summary
         petitions:
-          count:
-            petitions_count: "%{total_count} Petitions"
-          edit:
-            title: Edit Petition
-            save: Save
-          new:
-            title: New Petition
-            create: Create
-          index:
-            title: Petitions
-            votes: Votes
+          activate:
+            success: The petition was opened succesfully
+          deactivate:
+            success: The petition was closed succesfully
           destroy:
             success: Petition deleted
+          edit:
+            save: Save
+            title: Edit Petition
+          index:
+            title: Petitions
+          new:
+            create: Create
+            title: New Petition
       models:
         petition:
           fields:
-            title: Title
-            signatures: Signatures
             closing_date: Closing date
-    components:
+            signatures: Signatures
+            title: Title
       petitions:
-        name: Petitions
-        settings:
-          global:
-            chainspace_url: Chainspace API URL
-          step:
-            announcement: Announcement
-            votes_enabled: Votes enabled
+        count:
+          petitions_count: "%{count} Petitions"
+        petition:
+          description: Description
+          open_expo: Sign with Expo
+          open_wallet: Sign with Decode App
+          participate: Participate
+          summary: Summary
+          votes: Votes
+      states:
+        opened: Open
+        closed: Closed

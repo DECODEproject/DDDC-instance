@@ -10,7 +10,12 @@ module Decidim
       paths["lib/tasks"] = nil
 
       routes do
-        resources :petitions
+        resources :petitions do
+          member do
+            post :activate
+            post :deactivate
+          end
+        end
         root to: "petitions#index"
       end
 

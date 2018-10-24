@@ -5,12 +5,33 @@ module Decidim
     class PetitionMCell < Decidim::CardMCell
       include PetitionCellsHelper
 
+      property :state
+
       private
 
       def has_image?
         true
       end
 
+      def has_state?
+        true
+      end
+
+      def badge_name
+       I18n.t(state, scope: "decidim.petitions.states")
+      end
+
+      def state_classes
+        case state
+        when "opened"
+          ["success"]
+        when "closed"
+          ["warning"]
+        else
+          ["muted"]
+        end
+      end
+        
       def body
         translated_attribute(present(model).summary)
       end

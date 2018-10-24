@@ -59,6 +59,28 @@ module Decidim
           end
         end
 
+        def activate
+          enforce_permission_to :update, :petition, petition: petition
+
+          ActivatePetition.call(petition) do
+            on(:ok) do
+              flash[:notice] = I18n.t("petitions.activate.success", scope: "decidim.petitions.admin")
+              redirect_to petitions_path
+            end
+          end
+        end
+
+        def deactivate
+          enforce_permission_to :update, :petition, petition: petition
+
+          DeactivatePetition.call(petition) do
+            on(:ok) do
+              flash[:notice] = I18n.t("petitions.deactivate.success", scope: "decidim.petitions.admin")
+              redirect_to petitions_path
+            end
+          end
+        end
+
         private
 
         def petition

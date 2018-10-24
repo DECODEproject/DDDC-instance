@@ -11,6 +11,17 @@ module Decidim
       def body
         title
       end
+
+      scope :closed, -> { where(state: "closed") }
+      scope :opened, -> { where(state: "opened") }
+
+      def closed?
+        state == "closed"
+      end
+
+      def opened?
+        state == "opened"
+      end
     end
   end
 end
