@@ -1,0 +1,7 @@
+es:
+  layouts:
+    decidim:
+      cookie_warning:
+        description_html: Esta web no usa cookies de terceros. Si sigues navegando nuestra web, solo consientes el uso de nuestro conjunto mínimo de cookies operativas y estadísticas. Para saber más, %{link}.
+        link_label: aquí
+        ok: Estoy de acuerdo

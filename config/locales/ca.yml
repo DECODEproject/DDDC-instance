@@ -1,0 +1,7 @@
+ca:
+  layouts:
+    decidim:
+      cookie_warning:
+        description_html: Aquesta web no usa cookies de tercers. Si segueixes navegant nostra web, solament consents l'us del nostre conjunt mínim de cookies operatives i estadístiques. Per saber més, %{link}.
+        link_label: aquí
+        ok: Hi estic d'acord
