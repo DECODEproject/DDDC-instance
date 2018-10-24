@@ -19,6 +19,7 @@ module Decidim
 
         def activate_petition
           petition.update! state: "opened", open: true
+          DecodeConnectorWorker.perform_async(:create)
         end
       end
     end
