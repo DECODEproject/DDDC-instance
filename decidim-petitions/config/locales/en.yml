@@ -1,6 +1,9 @@
 ---
 en:
   decidim:
+    components:
+      petitions:
+        name: Petitions
     petitions:
       actions:
         close: Close petition
@@ -33,6 +36,13 @@ en:
           new:
             create: Create
             title: New Petition
+      credentials:
+        create: Send
+        created: Credential created succesfully
+        description: Credential Issuer description
+        error: Can't create credential
+        invalid: Credential invalid
+        issuer: Credential Issuer
       models:
         petition:
           fields:
@@ -50,5 +60,5 @@ en:
           summary: Summary
           votes: Votes
       states:
-        opened: Open
         closed: Closed
+        opened: Open

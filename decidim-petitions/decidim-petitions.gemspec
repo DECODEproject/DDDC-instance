@@ -22,5 +22,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "cells-erb", "~> 0.1.0"
   s.add_dependency "cells-rails", "~> 0.0.9"
+  s.add_dependency "rest-client", "~> 2.0"
   s.add_dependency "rqrcode", "~> 0.10"
 end
