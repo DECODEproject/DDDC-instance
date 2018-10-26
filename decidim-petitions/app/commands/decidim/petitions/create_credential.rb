@@ -22,7 +22,7 @@ module Decidim
       def create_credential!
         return broadcast(:invalid) if @form.invalid?
         begin
-          response = RestClient.post(Rails.application.secrets.decode.credential_issuer_url, dni: @form.dni)
+          response = RestClient.post(Rails.application.secrets.decode[:credential_issuer_url], dni: @form.dni)
         rescue RestClient::ExceptionWithResponse => e
           response = e.response
         end
