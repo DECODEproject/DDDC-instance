@@ -28,9 +28,9 @@ module Decidim
         end
         case response.code
         when 200
-          broadcast(:ok, response.body)
+          broadcast(:ok, JSON.parse(response.body))
         else
-          broadcast(:error, response.body)
+          broadcast(:error)
         end
       end
     end

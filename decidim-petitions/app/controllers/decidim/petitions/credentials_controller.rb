@@ -15,9 +15,12 @@ module Decidim
       def create
         @form = form(CredentialForm).from_params(params)
         CreateCredential.call(@form) do
-          on(:ok) do
+          on(:ok) do |result|
             flash[:notice] = I18n.t("credentials.created", scope: "decidim.petitions")
-            redirect_to :root
+            redirect_url = URI.parse(@form.linked_uri)
+            query = URI.decode_www_form(redirect_url.query || '') << ["credential", result["credential"]]
+            redirect_url.query = URI.encode_www_form(query)
+            redirect_to redirect_url.to_s
           end
 
           on(:invalid) do
