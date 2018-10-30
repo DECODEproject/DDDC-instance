@@ -1,4 +1,6 @@
-<%# <%= render partial: "decidim/shared/component_announcement" %1> %>
+<% if translated_attribute(current_participatory_space.announcement).present? %>
+  <%= render partial: "decidim/shared/announcement", locals: { announcement: current_participatory_space.announcement } %>
+<% end %>
 
 <div class="row columns">
   <div class="title-action">

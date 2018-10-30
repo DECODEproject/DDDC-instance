@@ -6,6 +6,9 @@
   url: petition_url(petition.id)
 }) %>
 
+<% if translated_attribute(current_participatory_space.announcement).present? %>
+  <%= render partial: "decidim/shared/announcement", locals: { announcement: current_participatory_space.announcement } %>
+<% end %>
 
 <div class="row column view-header">
   <h2 class="heading2"><%= translated_attribute present(petition).title %></h2>
@@ -20,7 +23,7 @@
           <img src="<%= petition_qrcode(petition) %>" />
         </div>
         <%= render partial: "votes_count" %>
-        <div class="card__actions">
+        <div class="show-for-small-only card__actions">
           <%= decodewallet_button(petition) %>
           <%= expo_button(petition) %>
         </div>
