@@ -4,6 +4,9 @@ en:
     components:
       petitions:
         name: Petitions
+        settings:
+          global:
+            chainspace_url: Chainspace URL
     petitions:
       actions:
         close: Close petition
