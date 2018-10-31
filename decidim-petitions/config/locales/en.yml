@@ -7,6 +7,9 @@ en:
         settings:
           global:
             chainspace_url: Chainspace URL
+          step:
+            announcement: Announcement
+            votes_enabled: Votes enabled?
     petitions:
       actions:
         close: Close petition
