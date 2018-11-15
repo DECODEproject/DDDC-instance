@@ -38,7 +38,7 @@ group :development do
   gem 'bcrypt_pbkdf'
   gem 'capistrano', '3.10.2', require: false
   gem 'capistrano-bundler', '~> 1.2', require: false
-  gem 'capistrano-passenger'
+  gem 'capistrano3-puma'
   gem 'capistrano-rails', '1.1.8', require: false
   gem 'capistrano-rbenv'
   gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
