@@ -10,6 +10,10 @@ en:
           step:
             announcement: Announcement
             votes_enabled: Votes enabled?
+    pages:
+      home:
+        statistics:
+          petitions_count: Petitions
     petitions:
       actions:
         close: Close petition
