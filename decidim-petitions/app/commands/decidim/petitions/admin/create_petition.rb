@@ -29,7 +29,7 @@ module Decidim
             image: @form.image,
             description: @form.description,
             component: @form.current_component,
-            decidim_author_id: @current_user.id
+            author: @current_user
           )
         end
       end
