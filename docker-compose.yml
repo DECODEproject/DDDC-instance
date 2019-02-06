@@ -1,10 +1,10 @@
 version: '3'
 services:
   app:
-    image: decidim/decidim:0.13.1
+    build: .
     volumes:
       - .:/app
-      - bundle:/usr/local/bundle
+      - bundle_cache:/bundle
       - node_modules:/app/node_modules
     environment:
       - PORT=3000
@@ -15,12 +15,12 @@ services:
       - 3000:3000
     links:
       - pg
-    command: bundle exec puma
+    command: bash -c "rm tmp/pids/server.pid ; bundle exec rails server -b 0.0.0.0"
   pg:
     image: postgres
     volumes:
       - pg-data:/var/lib/postgresql/data
 volumes:
   node_modules: {}
-  bundle: {}
+  bundle_cache: {}
   pg-data: {}
