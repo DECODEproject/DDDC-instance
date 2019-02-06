@@ -23,9 +23,12 @@
           <img src="<%= petition_qrcode(petition) %>" />
         </div>
         <%= render partial: "votes_count" %>
-        <div class="show-for-small-only card__actions">
+        <div class="show-for-touch card__actions">
           <%= decodewallet_button(petition) %>
           <%= expo_button(petition) %>
+        </div>
+        <div class="hide-for-touch card__actions callout secondary">
+          <%= t ".incompatible_html", url: "#" %>
         </div>
       </div>
     </div>

@@ -37,19 +37,19 @@ rails server
 
 You should deploy it as other Ruby on Rails applications, using Capistrano or other methods for deployment that you prefer.
 
-As a dependency it needs the [decidim-decode-connector](https://github.com/DECODEproject/decidim-decode-connector) on the same server.
-
-TODO: how to configure the local route on Decidim configuration.
-
 ## About petitions module
 
 We implemented the DECODE prototypes based on a Decidim module. It's on the `decidim-petitions/` directory.
 
 ### Configuring
 
-Go to the /admin, configure a new Participatory Process, add Petition component and configure a Petition.
+Dependencies:
 
-You can set up the Chainspace URI here.
+* [decidim-decode-connector](https://github.com/DECODEproject/decidim-decode-connector). Configures at config/secrets.yml (`decode.connector_path`).
+* [credential-issuer](https://github.com/DECODEproject/credential-issuer). Configures at config/secrets.yml (`decode.credential_issuer_url`).
+* [chainspace](https://github.com/DECODEproject/decidim-pilot-infrastructure/). Configures at Decidim administrator admin panel.
+
+Go to the /admin, configure a new Participatory Process, add Petition component and configure a Petition.
 
 ### Screenshots
 
@@ -104,5 +104,9 @@ To consume this data, you can do it on the GraphQL API:
 }
 ```
 
+An example with curl:
 
+```bash
+curl 'https://betadddc.alabs.org/api' -H 'content-type: application/json'  --data '{"query":"{\n  petition(id:\"1\") {\n    id, \n    title,\n    description,\n    author,\n    json_schema \n  }\n}\n","variables":null,"operationName":null}'
+```
 
