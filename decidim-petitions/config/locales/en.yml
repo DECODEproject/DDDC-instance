@@ -69,6 +69,8 @@ en:
           participate: Participate
           summary: Summary
           votes: Votes
+        show:
+          incompatible_html: You're not on a compatible device. <a href="%{url}">Download the app</a> and visit this page with your mobile phone, or scan the QR code with Decode App.
       states:
         closed: Closed
         opened: Open
