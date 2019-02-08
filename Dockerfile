@@ -13,9 +13,9 @@ ENV BUNDLE_PATH=/bundle \
     BUNDLE_BIN=/bundle/bin \
     GEM_HOME=/bundle
 ENV PATH="${BUNDLE_BIN}:${PATH}"
-
-ADD . /app
-
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
+ADD decidim-petitions/ /app/decidim-petitions
 RUN bundle install
+
+ADD . /app
