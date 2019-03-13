@@ -10,32 +10,27 @@ implementing the [DECODE](https://decodeproject.eu/) prototypes.
 
 You will need to do some steps before having the app working properly once you've deployed it:
 
-1. Clone this repository:
-```console
+1. Clone this repository, go to the directory and starts with docker-compose
+```bash
 git clone https://github.com/alabs/DDDC
-```
-2. Go to the directory:
-```console
 cd DDDC
+docker-compose up
+docker-compose run app rails db:create
+docker-compose run app rails db:migrate
+docker-compose run app rails db:seed
 ```
-3. Install the gems:
-```console
-bundle install
-```
-4. Set up the database. If you need you can change your settings using the environment variables from config/database.yml:
-```console
-rails db:create
-rails db:migrate
-rails db:seed
-```
-5. Start the web server:
-```console
-rails server
+
+Go to http://localhost:3000/
+
+### Staging
+
+```bash
+docker-compose run app bundle exec cap staging deploy
 ```
 
 ### Production
 
-You should deploy it as other Ruby on Rails applications, using Capistrano or other methods for deployment that you prefer.
+Push master branch to Heroku.
 
 ## About petitions module
 
@@ -109,4 +104,5 @@ An example with curl:
 ```bash
 curl 'https://betadddc.alabs.org/api' -H 'content-type: application/json'  --data '{"query":"{\n  petition(id:\"1\") {\n    id, \n    title,\n    description,\n    author,\n    json_schema \n  }\n}\n","variables":null,"operationName":null}'
 ```
+
 
