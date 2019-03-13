@@ -53,13 +53,6 @@ en:
           new:
             create: Create
             title: New Petition
-      credentials:
-        create: Send
-        created: Credential created succesfully
-        description: Credential Issuer description
-        error: Can't create credential
-        invalid: Credential invalid
-        issuer: Credential Issuer
       models:
         petition:
           fields:
