@@ -105,4 +105,10 @@ An example with curl:
 curl 'https://betadddc.alabs.org/api' -H 'content-type: application/json'  --data '{"query":"{\n  petition(id:\"1\") {\n    id, \n    title,\n    description,\n    author,\n    json_schema \n  }\n}\n","variables":null,"operationName":null}'
 ```
 
+## Zenroom
 
+Although most of the actions to Zenroom / Chainspace are using a proxy with Petitions API, for some actions (hashing value set attributes and tallying) it's necessary to execute zenroom from the application itself. For set up purposes we're copying the binary on bin/. If you want to upgrade it, you can follow these instructions (changing 0.8.1 for the new version as published on [Zenroom](https://github.com/DECODEproject/zenroom). You can download the binary from Dyne.org (https://sdk.dyne.org:4443/view/decode/):
+
+```bash
+wget https://sdk.dyne.org:4443/view/decode/job/zenroom-static-amd64/lastSuccessfulBuild/artifact/src/zenroom-static -O bin/zenroom-static
+```
