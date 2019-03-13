@@ -1,9 +1,11 @@
+require 'decidim/petitions/decode_connector'
+
 class DecodeConnectorWorker
   include Sidekiq::Worker
 
-  def perform(action)
-    path = Rails.application.secrets.decode[:connector_path]
-    output = `cd #{path} && make #{action}`
-    puts output
+  def perform(petition_id)
+    petition = Decidim::Petitions::Petition.find petition_id
+    connector = Decidim::Petitions::DecodeConnector.new(petition)
+    connector.main
   end
 end

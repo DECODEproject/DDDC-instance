@@ -12,6 +12,10 @@ module Decidim
         title
       end
 
+      def attribute_id
+        Decidim.config.application_name.downcase.gsub(' ', '-') + "-" + id.to_s
+      end
+
       scope :closed, -> { where(state: "closed") }
       scope :opened, -> { where(state: "opened") }
 

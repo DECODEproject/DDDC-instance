@@ -19,7 +19,13 @@ en:
         close: Close petition
         confirm_close: Are you sure to close this petition?
         confirm_destroy: Are you sure to destroy this petition?
-        confirm_open: Are you sure to open this petition?
+        confirm_open: >
+          Are you sure to open this petition?
+
+
+          This will create all the actions on Credential Issuer API, Petitions API and BCN Now Dashboard API.
+
+          Please check that you have configured (through secrets.yml or environmental variables) all the endpoints for these services.
         destroy: Destroy
         edit: Edit
         new: New

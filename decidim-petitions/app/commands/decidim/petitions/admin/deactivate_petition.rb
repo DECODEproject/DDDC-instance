@@ -19,7 +19,7 @@ module Decidim
 
         def deactivate_petition
           petition.update! state: "closed", open: false
-          DecodeConnectorWorker.perform_async(:close)
+          # TODO: implement with worker with Petitions API
         end
       end
     end
