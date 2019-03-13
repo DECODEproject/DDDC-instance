@@ -29,7 +29,8 @@ module Decidim
             summary: form.summary,
             description: form.description,
             image: form.image,
-            json_schema: JSON.parse(form.json_schema)
+            json_schema: JSON.parse(form.json_schema),
+            json_attribute_info: JSON.parse(form.json_attribute_info)
           )
         end
       end

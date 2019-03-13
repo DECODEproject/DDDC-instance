@@ -18,5 +18,8 @@
     <div class="row column">
       <%= form.text_area :json_schema, value: JSON.pretty_generate(@form.json_schema), toolbar: nil, rows: 30, label: t("model.components.json_schema", scope: "decidim.petitions.admin") %>
     </div>
+    <div class="row column">
+      <%= form.text_area :json_attribute_info, value: JSON.pretty_generate(@form.json_attribute_info), toolbar: nil, rows: 30, label: t("model.components.json_attribute_info", scope: "decidim.petitions.admin") %>
+    </div>
   </div>
 </div>

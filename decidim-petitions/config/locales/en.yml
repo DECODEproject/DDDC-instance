@@ -30,6 +30,7 @@ en:
           components:
             description: Description
             json_schema: JSON Schema
+            json_attribute_info: JSON Attribute Info for Credential Issuer
             summary: Summary
         petitions:
           activate:
