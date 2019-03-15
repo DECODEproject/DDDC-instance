@@ -12,6 +12,10 @@ module Decidim
         title
       end
 
+      def community_id
+        title
+      end
+
       def attribute_id
         Decidim.config.application_name.downcase.gsub(' ', '-') + "-" + id.to_s
       end

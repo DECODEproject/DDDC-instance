@@ -40,6 +40,8 @@ en:
             summary: Summary
         petitions:
           activate:
+            errors:
+              credential_issuer: "There was an error with the setup. Credential Issuer response was %{status_code}."
             success: The petition was opened succesfully
           deactivate:
             success: The petition was closed succesfully
