@@ -8,20 +8,24 @@ module Decidim
 
       mount_uploader :image, Decidim::Petitions::ImageUploader
 
+      scope :closed, -> { where(state: "closed") }
+      scope :opened, -> { where(state: "opened") }
+
       def body
         title
       end
 
+      def community_name
+        title["en"]
+      end
+
       def community_id
-        title
+        SecureRandom.hex(20)
       end
 
       def attribute_id
         Decidim.config.application_name.downcase.gsub(' ', '-') + "-" + id.to_s
       end
-
-      scope :closed, -> { where(state: "closed") }
-      scope :opened, -> { where(state: "opened") }
 
       def closed?
         state == "closed"

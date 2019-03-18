@@ -41,11 +41,12 @@ We implemented the DECODE prototypes based on a Decidim module. It's on the `dec
 Dependencies:
 
 * [dddc-credential-issuer](https://github.com/DECODEproject/dddc-credential-issuer). Configures at config/secrets.yml (`decode.credential_issuer`).
+* [dddc-petitions](https://github.com/DECODEproject/dddc-petition-api). Configures at config/secrets.yml (`decode.credential_issuer`).
 * [bcnnow](https://github.com/DECODEproject/bcnnow). Configures at config/secrets.yml (`decode.credential_issuer`).
-* [zenroom](https://github.com/DECODEproject/zenroom). Binary self contained on `bin/zenroom-static`. If you want to upgrade it, you can follow these instructions (changing 0.8.1 for the new version as published on [Zenroom](https://github.com/DECODEproject/zenroom). You can download the binary from Dyne.org (https://sdk.dyne.org:4443/view/decode/):
+* [zenroom](https://github.com/DECODEproject/zenroom). Binary self contained on `decidim-petitions/bin/zenroom-static`. If you want to upgrade it, you can follow these instructions (changing 0.8.1 for the new version as published on [Zenroom](https://github.com/DECODEproject/zenroom). You can download the binary from Dyne.org (https://sdk.dyne.org:4443/view/decode/):
 
 ```bash
-wget https://sdk.dyne.org:4443/view/decode/job/zenroom-static-amd64/lastSuccessfulBuild/artifact/src/zenroom-static -O bin/zenroom-static
+wget https://sdk.dyne.org:4443/view/decode/job/zenroom-static-amd64/lastSuccessfulBuild/artifact/src/zenroom-static -O decidim-petitions/bin/zenroom-static
 ```
 
 Go to the /admin, configure a new Participatory Process, add Petition component and configure a Petition.
@@ -140,4 +141,3 @@ An example with curl:
 ```bash
 curl 'https://betadddc.alabs.org/api' -H 'content-type: application/json'  --data '{"query":"{\n  petition(id:\"1\") {\n    id, \n    title,\n    description,\n    author,\n    json_schema \n  }\n}\n","variables":null,"operationName":null}'
 ```
-

@@ -42,6 +42,8 @@ en:
           activate:
             errors:
               credential_issuer: "There was an error with the setup. Credential Issuer response was %{status_code}."
+              barcelona_now: "There was an error with the setup. Barcelona Now response was %{status_code}."
+              petitions: "There was an error with the setup. Petitions API response was %{status_code}."
             success: The petition was opened succesfully
           deactivate:
             success: The petition was closed succesfully

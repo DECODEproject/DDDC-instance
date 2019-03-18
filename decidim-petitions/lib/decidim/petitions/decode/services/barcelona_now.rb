@@ -34,16 +34,23 @@ module Decidim
               logger_resp "Barcelona NOW Dashboard setup", response
             rescue RestClient::ExceptionWithResponse => err
               case err.http_code
-              when 409
-                logger "Barcelona Now FAILED! 409 conflict on Credential Issuer"
-                status_code = 409
+              # When it's already defined, Barcelona Now API returns a 501
+              # with an error message that the community already exists.
+              # For consistency with the rest of the APIs we'll set it as a 409 status
+              when 501
+                if err.response.to_s == "{\n  \"message\": \"community_id or attribute_id already exist\"\n}\n"
+                  logger "Barcelona Now FAILED! 409 conflict"
+                  status_code = 409
+                else
+                  logger "Barcelona Now FAILED!"
+                  status_code = 500
+                end
               else
                 logger "Barcelona Now FAILED!"
                 status_code = 500
               end
             end
             return { response: response, status_code: status_code }
-
           end
 
         end
