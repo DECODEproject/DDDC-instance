@@ -28,6 +28,7 @@ module Decidim
             Rails.application.secrets.decode[:petitions]
           )
           dddc_petitions.close(
+            bearer: @petition.petition_bearer,
             petition_id: @petition.id
           )
         end

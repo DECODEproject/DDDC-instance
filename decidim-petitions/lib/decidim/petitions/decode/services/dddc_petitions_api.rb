@@ -50,18 +50,12 @@ module Decidim
                 status_code = 500
               end
             end
-            return { response: response, status_code: status_code }
+            return { response: response, status_code: status_code, bearer: bearer }
           end
 
-          def close(petition_id: '')
+          def close(bearer: '', petition_id: '')
             # Close the petition on Petition's API
             #
-            url = @login[:url]
-            bearer = get_bearer(
-              url: url,
-              username: @login[:username],
-              password: @login[:password]
-            )
             begin
               response = RestClient.post(
                 "#{url}/petitions/#{petition_id}/tally",

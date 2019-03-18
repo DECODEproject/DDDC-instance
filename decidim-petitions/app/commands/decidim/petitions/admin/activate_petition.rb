@@ -52,6 +52,7 @@ module Decidim
 
         def setup_dddc_petitions connector
           result = connector.setup_dddc_petitions
+          petition.update(:petition_bearer, result[:bearer])
           check_for_errors result[:status_code], "petitions"
         end
 
