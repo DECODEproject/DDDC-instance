@@ -73,7 +73,7 @@ It's important to configure the JSON schema and JSON attribute info so it's cons
       "object": "Barcelona",
       "scope": "can-access",
       "provenance": {
-        "url": "http://atlantis-decode.s3-website-eu-west-1.amazonaws.com"
+        "url": "http://example.com"
       }
     }
   ],
@@ -97,25 +97,9 @@ It's important to configure the JSON schema and JSON attribute info so it's cons
 ```json
 [
   {
-    "name": "email",
-      "type": "str",
-      "value_set": [
-        "andres@example.com",
-        "jordi@example.com",
-        "pablo@example.com"
-      ]
-  },
-  {
-    "name": "zip_code",
-    "type": "int",
-    "value_set": [
-      "08001",
-      "08002",
-      "08003",
-      "08004",
-      "08005",
-      "08006"
-    ]
+    "name": "codes",
+    "type": "str",
+    "value_set": [ "eih5O","nuu3S","Pha6x","lahT4","Ri3ex","Op2ii","EG5th","ca5Ca","TuSh1","ut0iY","Eing8","Iep1H","yei2A","ahf3I","Oaf8f","nai1H","aib5V","ohH5v","eim2E","Nah5l","ooh5C","Uqu3u","Or2ei","aF9fa","ooc8W" ]
   }
 ]
 ```
@@ -131,7 +115,11 @@ To consume some data, you can do it on the GraphQL API:
     title,
     description,
     author,
-    json_schema
+    json_schema,
+    image,
+    credential_issuer_api_url,
+    petitions_api_url,
+    attribute_id
   }
 }
 ```
@@ -139,5 +127,5 @@ To consume some data, you can do it on the GraphQL API:
 An example with curl:
 
 ```bash
-curl 'https://betadddc.alabs.org/api' -H 'content-type: application/json'  --data '{"query":"{\n  petition(id:\"1\") {\n    id, \n    title,\n    description,\n    author,\n    json_schema \n  }\n}\n","variables":null,"operationName":null}'
+curl 'https://betadddc.alabs.org/api' -H 'content-type: application/json'  --data '{"query":"{ petition(id:\"1\") { id, title, description, author, json_schema, image, credential_issuer_api_url, petitions_api_url, attribute_id } }"}'
 ```
