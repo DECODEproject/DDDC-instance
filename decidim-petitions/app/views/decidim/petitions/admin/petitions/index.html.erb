@@ -16,6 +16,10 @@
         <li><%= icon "script" %> Create Petitions API: externally sends to Petitions API. </li>
       </ol>
       <p>From this moment you can sign with the Mobile App. </p>
+      <p>You can check that everything is working with:<p>
+        <ol>
+          <li><%= icon "code" %> Get: externally sends to Petitions API the get command to get information. <b>Don't change anything (title, description, census data, etc) on the petition</b>.<p></li>
+    </ol>
       <p>For closing the petition:</p>
       <ol>
         <li><%= icon "lock-locked" %> Deactivate: internally mark the petition as "closed" on DDDC </li>
@@ -77,6 +81,11 @@
                   <% end %>
                 <% end %>
               <td class="table-list__actions">
+                <%= icon_link_to "code",
+                      decode_petition_path(petition, command: :get),
+                      t("actions.get", scope: "decidim.petitions"),
+                      method: :post,
+                      class: "action-icon--get" %>
                 <% if allowed_to? :update, :petition, petition: petition %>
                   <%= icon_link_to "pencil",
                           edit_petition_path(petition), t("actions.edit", scope: "decidim.petitions"),

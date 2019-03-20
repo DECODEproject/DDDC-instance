@@ -32,9 +32,15 @@ module Decidim
           end
 
           def count(bearer: '', petition_id: '')
-            # Tally the petition
+            # Count the petition
             #
             wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/#{petition_id}/count", bearer: bearer)
+          end
+
+          def get(bearer: '', petition_id: '')
+            # Get the petition with extended information
+            #
+            wrapper(http_method: :get, http_path: "#{@login[:url]}/petitions/#{petition_id}?expand=true")
           end
 
         end

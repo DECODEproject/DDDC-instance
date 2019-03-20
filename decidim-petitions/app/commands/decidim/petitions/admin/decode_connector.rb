@@ -28,8 +28,15 @@ module Decidim
           when "barcelona_now_dashboard"
             connector.setup_barcelona_now
           when "petitions"
-            connector.setup_dddc_petitions
+            result = connector.setup_dddc_petitions
             petition.update_attribute(:petition_bearer, result[:bearer])
+            result
+          when "get"
+            result = connector.get_dddc_petitions
+            if result[:status_code] == 200
+              flash[:info] = result[:response].body.as_json
+            end
+            result
           when "tally"
             connector.tally_dddc_petitions
           when "count"

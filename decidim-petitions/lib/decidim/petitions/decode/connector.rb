@@ -67,6 +67,14 @@ module Decidim
           )
         end
 
+        def get_dddc_petitions
+          dddc_petitions = Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
+            Rails.application.secrets.decode[:petitions]
+          )
+          dddc_petitions.get(
+            petition_id: @petition.attribute_id
+          )
+        end
       end
     end
   end

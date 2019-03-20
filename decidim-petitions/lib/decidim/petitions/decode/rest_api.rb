@@ -22,12 +22,14 @@ module Decidim
         def logger_resp(message, resp)
           # Log rest-client responses
           #
-          logger message + " - initializing"
+          logger("*" * 80)
+          logger(message + " - initializing")
           logger resp.code
           logger resp.body
           logger resp.headers
           logger resp.request
-          logger message + " - closing"
+          logger(message + " - closing")
+          logger("*" * 80)
         end
 
         def logger message
@@ -47,8 +49,9 @@ module Decidim
               status_code = 200
               logger_resp "API setup", response
             when :get
-              # TODO
-            end
+              response = call_get(http_path)
+              status_code = 200
+              logger_resp "API setup", response            end
           rescue RestClient::ExceptionWithResponse => err
             status_code = error_logger(err)
           end
@@ -69,6 +72,18 @@ module Decidim
           response = RestClient.post(
             http_path,
             params.to_json,
+            headers
+          )
+        end
+
+        def call_get(http_path)
+          # Accepts an optional bearer and make a POST request
+          #
+          headers = { content_type: :json, accept: :json }
+          logger http_path
+          logger headers
+          response = RestClient.get(
+            http_path,
             headers
           )
         end

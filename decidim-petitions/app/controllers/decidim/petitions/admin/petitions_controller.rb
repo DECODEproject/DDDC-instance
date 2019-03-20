@@ -71,11 +71,12 @@ module Decidim
         end
 
         def decode
+          # Executes command on DECODE to different APIs
+          #
           enforce_permission_to :update, :petition, petition: petition
-
-          DecodeConnector.call(petition, @command) do
+          DecodeConnector.call(petition, params[:command]) do
             on(:ok) do
-              flash[:notice] = I18n.t("petitions.decode.success.#{@command}", scope: "decidim.petitions.admin")
+              flash[:notice] = I18n.t("petitions.decode.success.#{params[:command]}", scope: "decidim.petitions.admin")
               redirect_to petitions_path
             end
           end

@@ -16,6 +16,7 @@ en:
           petitions_count: Petitions
     petitions:
       actions:
+        get: Get petition data from Petitions API
         count: Count petition with Petitions API
         recount: Count petition with Zenroom
         deactivate: Close petition
@@ -61,9 +62,12 @@ en:
               petitions: "There was an error with the setup. Petitions API response was %{status_code}."
             success: The petition was opened succesfully
           decode:
-            errors: >
-              There was an error with the request to the server. Please check the server logs for details.
-            success: The petition was succesfully created
+            errors:
+              tally: There was an error with the request to the server to Tally. Please check the server logs for details.
+            success:
+              credential_issuer: The petition was succesfully created on Credential Issuer API
+              barcelona_now_dashboard: The petition was succesfully created on Barcelona Now API
+              petitions: The petition was succesfully created on Petitions API
           deactivate:
             success: The petition was closed succesfully
           update:
