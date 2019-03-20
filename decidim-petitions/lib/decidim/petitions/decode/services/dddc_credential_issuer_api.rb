@@ -8,6 +8,7 @@ module Decidim
     module Decode
       module Services
         class DDDCCredentialIssuerAPI
+          # Integration with https://github.com/DECODEproject/dddc-credential-issuer
 
           include RestApi
 
@@ -23,43 +24,12 @@ module Decidim
             # If reissuable is true, then we send that configuration to Credential Issuer
             #
             url = @login[:url]
-            bearer = get_bearer(
-              url: url,
-              username: @login[:username],
-              password: @login[:password]
-            )
+            bearer = get_bearer( url: url, username: @login[:username], password: @login[:password])
             attribute_info = hash_attributes ? hash_attribute_info(attribute_info) : attribute_info
-            begin
-              response = RestClient.post(
-                "#{url}/authorizable_attribute",
-                {
-                  authorizable_attribute_id: "Authorizable Attribute #{attribute_id}",
-                  authorizable_attribute_info: attribute_info,
-                  reissuable: reissuable
-                }.to_json,
-                {
-                  authorization: "Bearer #{bearer}",
-                  content_type: :json,
-                  accept: :json
-                }
-              )
-              status_code = 200
-              logger_resp "Credential issuer setup - Authorizable Attribute #{attribute_id}", response
-            rescue RestClient::ExceptionWithResponse => err
-              case err.http_code
-              when 409
-                logger "Credential issuer FAILED! 409 conflict on Credential Issuer"
-                status_code = 409
-              else
-                logger "Credential issuer FAILED! 500 error on Credential Issuer"
-                status_code = 500
-              end
-            end
-            return { response: response, status_code: status_code }
-          end
-
-          def close
-            # TODO: implement
+            params = { authorizable_attribute_id: "Authorizable Attribute #{attribute_id}",
+                       authorizable_attribute_info: attribute_info,
+                       reissuable: reissuable }
+            wrapper(http_method: :post, http_path: "#{url}/authorizable_attribute", params: params, bearer: bearer)
           end
 
           def hash_attribute_info attribute_info
@@ -72,7 +42,7 @@ module Decidim
             output = []
             attribute_info.each do |attribute|
               hashes = []
-              attribute[:value_set].each do |x|
+              attribute["value_set"].each do |x|
                 hashes << Decidim::Petitions::Decode::Zenroom.hashing(x)
               end
               attribute.update({value_set: hashes})

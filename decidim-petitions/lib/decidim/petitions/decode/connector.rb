@@ -13,46 +13,15 @@ module Decidim
           @petition = petition
         end
 
-        def create
-          setup_dddc_credentials
-          setup_dddc_petitions
-          setup_barcelona_now
-        end
-
-        def close
-          close_dddc_petitions
-        end
-
-        def close_dddc_petitions
-          dddc_petitions = Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
-            Rails.application.secrets.decode[:petitions]
-          )
-          dddc_petitions.close(
-            bearer: @petition.petition_bearer,
-            petition_id: @petition.id
-          )
-        end
-
         def setup_dddc_credentials
           dddc_credentials = Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI.new(
             Rails.application.secrets.decode[:credential_issuer]
           )
-          # TODO: we should change hash_attributes and reissuable to true on production
           dddc_credentials.create(
-            hash_attributes: false,
+            hash_attributes: true,
             reissuable: false,
             attribute_id: @petition.attribute_id,
             attribute_info: @petition.json_attribute_info
-          )
-        end
-
-        def setup_dddc_petitions
-          dddc_petitions = Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
-            Rails.application.secrets.decode[:petitions]
-          )
-          dddc_petitions.create(
-            petition_id: @petition.id,
-            credential_issuer_url: Rails.application.secrets.decode[:credential_issuer]
           )
         end
 
@@ -65,6 +34,36 @@ module Decidim
             community_name: @petition.community_name,
             community_id: @petition.community_id,
             attribute_id: @petition.attribute_id
+          )
+        end
+
+        def setup_dddc_petitions
+          dddc_petitions = Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
+            Rails.application.secrets.decode[:petitions]
+          )
+          dddc_petitions.create(
+            petition_id: @petition.attribute_id,
+            credential_issuer_url: Rails.application.secrets.decode[:credential_issuer][:url]
+          )
+        end
+
+        def tally_dddc_petitions
+          dddc_petitions = Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
+            Rails.application.secrets.decode[:petitions]
+          )
+          dddc_petitions.tally(
+            bearer: @petition.petition_bearer,
+            petition_id: @petition.attribute_id
+          )
+        end
+
+        def count_dddc_petitions
+          dddc_petitions = Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
+            Rails.application.secrets.decode[:petitions]
+          )
+          dddc_petitions.count(
+            bearer: @petition.petition_bearer,
+            petition_id: @petition.attribute_id
           )
         end
 

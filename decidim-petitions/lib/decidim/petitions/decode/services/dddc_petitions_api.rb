@@ -7,6 +7,7 @@ module Decidim
     module Decode
       module Services
         class DDDCPetitionsAPI
+          # Integration with https://github.com/DECODEproject/dddc-petition-api
 
           include RestApi
 
@@ -17,68 +18,23 @@ module Decidim
           end
 
           def create(petition_id: '', credential_issuer_url: '')
-            # Setup the Petition's API
+            # Creates the petition
             #
-            url = @login[:url]
-            bearer = get_bearer(
-              url: url,
-              username: @login[:username],
-              password: @login[:password]
-            )
-            begin
-              response = RestClient.post(
-                "#{url}/petitions/",
-                {
-                  petition_id: petition_id,
-                  credential_issuer_url: credential_issuer_url
-                }.to_json,
-                {
-                  authorization: "Bearer #{bearer}",
-                  content_type: :json,
-                  accept: :json
-                }
-              )
-              status_code = 200
-              logger_resp "Petitions API setup", response
-            rescue RestClient::ExceptionWithResponse => err
-              case err.http_code
-              when 409
-                logger "Petitions API FAILED! 409 conflict"
-                status_code = 409
-              else
-                logger "Petitions API FAILED! 500 error"
-                status_code = 500
-              end
-            end
-            return { response: response, status_code: status_code, bearer: bearer }
+            bearer = get_bearer( url: @login[:url], username: @login[:username], password: @login[:password])
+            params = { petition_id: petition_id, credential_issuer_url: credential_issuer_url }
+            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/", bearer: bearer, params: params)
           end
 
-          def close(bearer: '', petition_id: '')
-            # Close the petition on Petition's API
+          def tally(bearer: '', petition_id: '')
+            # Tally the petition
             #
-            begin
-              response = RestClient.post(
-                "#{url}/petitions/#{petition_id}/tally",
-                {},
-                {
-                  authorization: "Bearer #{bearer}",
-                  content_type: :json,
-                  accept: :json
-                }
-              )
-              status_code = 200
-              logger_resp "Petitions API closing tally", response
-            rescue RestClient::ExceptionWithResponse => err
-              case err.http_code
-              when 409
-                logger "Petitions API FAILED! 409 conflict"
-                status_code = 409
-              else
-                logger "Petitions API FAILED! 500 error"
-                status_code = 500
-              end
-            end
-            return { response: response, status_code: status_code }
+            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/#{petition_id}/tally", bearer: bearer)
+          end
+
+          def count(bearer: '', petition_id: '')
+            # Tally the petition
+            #
+            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/#{petition_id}/count", bearer: bearer)
           end
 
         end
