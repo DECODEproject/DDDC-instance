@@ -70,6 +70,17 @@ module Decidim
           end
         end
 
+        def decode
+          enforce_permission_to :update, :petition, petition: petition
+
+          DecodeConnector.call(petition, @command) do
+            on(:ok) do
+              flash[:notice] = I18n.t("petitions.decode.success.#{@command}", scope: "decidim.petitions.admin")
+              redirect_to petitions_path
+            end
+          end
+        end
+
         def deactivate
           enforce_permission_to :update, :petition, petition: petition
 

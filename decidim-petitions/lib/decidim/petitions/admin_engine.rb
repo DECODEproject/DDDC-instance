@@ -14,6 +14,7 @@ module Decidim
           member do
             post :activate
             post :deactivate
+            post '/decode/:command', action: :decode, as: :decode
           end
         end
         root to: "petitions#index"

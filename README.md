@@ -40,9 +40,14 @@ We implemented the DECODE prototypes based on a Decidim module. It's on the `dec
 
 Dependencies:
 
-* [decidim-decode-connector](https://github.com/DECODEproject/decidim-decode-connector). Configures at config/secrets.yml (`decode.connector_path`).
-* [credential-issuer](https://github.com/DECODEproject/credential-issuer). Configures at config/secrets.yml (`decode.credential_issuer_url`).
-* [chainspace](https://github.com/DECODEproject/decidim-pilot-infrastructure/). Configures at Decidim administrator admin panel.
+* [dddc-credential-issuer](https://github.com/DECODEproject/dddc-credential-issuer). Configures at config/secrets.yml (`decode.credential_issuer`).
+* [dddc-petitions](https://github.com/DECODEproject/dddc-petition-api). Configures at config/secrets.yml (`decode.credential_issuer`).
+* [bcnnow](https://github.com/DECODEproject/bcnnow). Configures at config/secrets.yml (`decode.credential_issuer`).
+* [zenroom](https://github.com/DECODEproject/zenroom). Binary self contained on `decidim-petitions/bin/zenroom-static`. If you want to upgrade it, you can follow these instructions (changing 0.8.1 for the new version as published on [Zenroom](https://github.com/DECODEproject/zenroom). You can download the binary from Dyne.org (https://sdk.dyne.org:4443/view/decode/):
+
+```bash
+wget https://sdk.dyne.org:4443/view/decode/job/zenroom-static-amd64/lastSuccessfulBuild/artifact/src/zenroom-static -O decidim-petitions/bin/zenroom-static
+```
 
 Go to the /admin, configure a new Participatory Process, add Petition component and configure a Petition.
 
@@ -54,9 +59,11 @@ Go to the /admin, configure a new Participatory Process, add Petition component 
 ![](docs/decode-petitions-04.png)
 ![](docs/decode-petitions-05.png)
 
-### GraphQL
+### JSON Schema and Attributes Authorization
 
-It's important to configure the JSON attributes so it's consumed by other apps from DECODE ecosystem:
+It's important to configure the JSON schema and JSON attribute info so it's consumed by the DECODE's wallet app and BCN Now dashboard:
+
+**json_schema**
 
 ```json
 {
@@ -66,7 +73,7 @@ It's important to configure the JSON attributes so it's consumed by other apps f
       "object": "Barcelona",
       "scope": "can-access",
       "provenance": {
-        "url": "http://atlantis-decode.s3-website-eu-west-1.amazonaws.com"
+        "url": "http://example.com"
       }
     }
   ],
@@ -85,7 +92,21 @@ It's important to configure the JSON attributes so it's consumed by other apps f
 }
 ```
 
-To consume this data, you can do it on the GraphQL API:
+**json_attribute_info**
+
+```json
+[
+  {
+    "name": "codes",
+    "type": "str",
+    "value_set": [ "eih5O","nuu3S","Pha6x","lahT4","Ri3ex","Op2ii","EG5th","ca5Ca","TuSh1","ut0iY","Eing8","Iep1H","yei2A","ahf3I","Oaf8f","nai1H","aib5V","ohH5v","eim2E","Nah5l","ooh5C","Uqu3u","Or2ei","aF9fa","ooc8W" ]
+  }
+]
+```
+
+## GraphQL
+
+To consume some data, you can do it on the GraphQL API:
 
 ```graphql
 {
@@ -94,7 +115,11 @@ To consume this data, you can do it on the GraphQL API:
     title,
     description,
     author,
-    json_schema
+    json_schema,
+    image,
+    credential_issuer_api_url,
+    petitions_api_url,
+    attribute_id
   }
 }
 ```
@@ -102,13 +127,5 @@ To consume this data, you can do it on the GraphQL API:
 An example with curl:
 
 ```bash
-curl 'https://betadddc.alabs.org/api' -H 'content-type: application/json'  --data '{"query":"{\n  petition(id:\"1\") {\n    id, \n    title,\n    description,\n    author,\n    json_schema \n  }\n}\n","variables":null,"operationName":null}'
-```
-
-## Zenroom
-
-Although most of the actions to Zenroom / Chainspace are using a proxy with Petitions API, for some actions (hashing value set attributes and tallying) it's necessary to execute zenroom from the application itself. For set up purposes we're copying the binary on bin/. If you want to upgrade it, you can follow these instructions (changing 0.8.1 for the new version as published on [Zenroom](https://github.com/DECODEproject/zenroom). You can download the binary from Dyne.org (https://sdk.dyne.org:4443/view/decode/):
-
-```bash
-wget https://sdk.dyne.org:4443/view/decode/job/zenroom-static-amd64/lastSuccessfulBuild/artifact/src/zenroom-static -O bin/zenroom-static
+curl 'https://betadddc.alabs.org/api' -H 'content-type: application/json'  --data '{"query":"{ petition(id:\"1\") { id, title, description, author, json_schema, image, credential_issuer_api_url, petitions_api_url, attribute_id } }"}'
 ```

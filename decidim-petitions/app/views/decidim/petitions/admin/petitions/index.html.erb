@@ -5,14 +5,35 @@
       <%= link_to t("actions.new", scope: "decidim.petitions"), new_petition_path, class: "button tiny button--title" %>
     </h2>
   </div>
+    <div class="card-section">
+      <p>To use this module you need to have at least running Credentials Issuer API and Petition API from DECODE project.</p>
+      <p>Then you need to configure the petition with the associated data for the Mobile App. </p>
+      <p>Finally you need to execute these actions on this order:</p>
+      <ol>
+        <li><%= icon "lock-unlocked" %> Activate: internally mark the petition as "open" on DDDC. </li>
+        <li><%= icon "key" %> Create Credential Isssuer: externally sends to Credential Issuer API the census data and optional attributes to be aggregated for statistical purpose. </li>
+        <li><%= icon "dashboard" %> Create Dashboard API: externally sends to Barcelona Now Dashboard API the census title. </li>
+        <li><%= icon "script" %> Create Petitions API: externally sends to Petitions API. </li>
+      </ol>
+      <p>From this moment you can sign with the Mobile App. </p>
+      <p>For closing the petition:</p>
+      <ol>
+        <li><%= icon "lock-locked" %> Deactivate: internally mark the petition as "closed" on DDDC </li>
+        <li><%= icon "timer" %> Tally: externally sends to Petitions API the tally command to close. </li>
+        <li><%= icon "cloud" %> Count: externally sends to Petitions API the count command. </li>
+        <li><%= icon "cloudy" %> Recount: checks with Zenroom the count data. </li>
+      </ol>
+      <p>If any of these gives you an error you need to check your server logs to debug.</p>
+    </div>
+  </div>
   <div class="card-section">
     <div class="table-scroll">
       <table class="table-list">
         <thead>
           <tr>
             <th><%= t("models.petition.fields.title", scope: "decidim.petitions") %></th>
-            <th class="center"><%= t("models.petition.fields.closing_date", scope: "decidim.petitions") %></th>
             <th class="center"><%= t("models.petition.fields.signatures", scope: "decidim.petitions") %></th>
+            <th class="actions"><%= t("services.title", scope: "decidim.petitions") %></th>
             <th class="actions"><%= t("actions.title", scope: "decidim.petitions") %></th>
           </tr>
         </thead>
@@ -23,11 +44,38 @@
                 <%= translated_attribute(petition.title) %>
               </td>
               <td class="center">
-                2018-12-28
+                <%= petition.votes %>
               </td>
-              <td class="center">
-                0
-              </td>
+              <td class="table-list__actions">
+                <% if petition.open? %>
+                  <% decode_options = [
+                    {icon: "key", command: "credential_issuer", name: "Credential Issuer"},
+                    {icon: "dashboard", command: "barcelona_now_dashboard", name: "Barcelona Now Dashboard"},
+                    {icon: "script", command: "petitions", name: "Petitions"}
+                  ] %>
+                  <% decode_options.each do |option| %>
+                    <%= icon_link_to option[:icon],
+                          decode_petition_path(petition, command: option[:command].to_sym),
+                          t("actions.open.#{option[:command]}", scope: "decidim.petitions"),
+                          method: :post,
+                          data: { confirm: t("actions.confirm_open", service: option[:name], scope: "decidim.petitions") },
+                          class: "action-icon--open-#{option[:command]}" %>
+                  <% end %>
+                <% else %>
+                  <% decode_options = [
+                    {icon: "timer", command: "tally", name: "Tally Petitions"},
+                    {icon: "cloud", command: "count", name: "Count Petitions"},
+                    {icon: "cloudy", command: "recount", name: "Count Zenroom"}
+                  ] %>
+                  <% decode_options.each do |option| %>
+                    <%= icon_link_to option[:icon],
+                          decode_petition_path(petition, command: option[:command].to_sym),
+                          t("actions.close.#{option[:command]}", scope: "decidim.petitions"),
+                          method: :post,
+                          data: { confirm: t("actions.confirm_count", service: option[:name], scope: "decidim.petitions") },
+                          class: "action-icon--close-#{option[:command]}" %>
+                  <% end %>
+                <% end %>
               <td class="table-list__actions">
                 <% if allowed_to? :update, :petition, petition: petition %>
                   <%= icon_link_to "pencil",
@@ -36,14 +84,14 @@
                   <% if petition.open? %>
                     <%= icon_link_to "lock-locked",
                           deactivate_petition_path(petition),
-                          t("actions.close", scope: "decidim.petitions"),
+                          t("actions.deactivate", scope: "decidim.petitions"),
                           method: :post,
                           data: { confirm: t("actions.confirm_close", scope: "decidim.petitions") },
                           class: "action-icon--activate" %>
                   <% else %>
                     <%= icon_link_to "lock-unlocked",
-                          activate_petition_path(petition), 
-                          t("actions.open", scope: "decidim.petitions"),
+                          activate_petition_path(petition),
+                          t("actions.activate", scope: "decidim.petitions"),
                           method: :post,
                           data: { confirm: t("actions.confirm_open", scope: "decidim.petitions") },
                           class: "action-icon--activate" %>

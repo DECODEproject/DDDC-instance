@@ -16,26 +16,58 @@ en:
           petitions_count: Petitions
     petitions:
       actions:
-        close: Close petition
+        count: Count petition with Petitions API
+        recount: Count petition with Zenroom
+        deactivate: Close petition
+        confirm_count: Are you sure to count this petition with Petitions API?
+        confirm_recount: Are you sure to recount this petition with Zenroom?
         confirm_close: Are you sure to close this petition?
         confirm_destroy: Are you sure to destroy this petition?
-        confirm_open: Are you sure to open this petition?
+        confirm_open: >
+          Are you sure to open this petition?
+
+          This will create the petition on %{service} API.
+
+          Please check that you have configured (through secrets.yml or environmental variables)
+          all the URL for these services. Check the documentation. This action is irreversible,
+          to try again you need to change the petition title.
+        close:
+          tally: Tally with Petitions API
+          count: Count with Petitions API
+          recount: Recount with Zenroom
         destroy: Destroy
         edit: Edit
         new: New
-        open: Open petition
+        activate: Open petition
+        open:
+          credential_issuer: Open DECODE Credential Issuer API
+          barcelona_now_dashboard: Open DECODE Barcelona Now Dashboard API
+          petitions: Open DECODE Petitions API
         title: Actions
+      services:
+        title: DECODE services
       admin:
         model:
           components:
             description: Description
             json_schema: JSON Schema
+            json_attribute_info: JSON Attribute Info for Credential Issuer
             summary: Summary
         petitions:
           activate:
+            errors:
+              credential_issuer: "There was an error with the setup. Credential Issuer response was %{status_code}."
+              barcelona_now: "There was an error with the setup. Barcelona Now response was %{status_code}."
+              petitions: "There was an error with the setup. Petitions API response was %{status_code}."
             success: The petition was opened succesfully
+          decode:
+            errors: >
+              There was an error with the request to the server. Please check the server logs for details.
+            success: The petition was succesfully created
           deactivate:
             success: The petition was closed succesfully
+          update:
+            success: The petition was updated succesfully
           destroy:
             success: Petition deleted
           edit:
@@ -46,13 +78,6 @@ en:
           new:
             create: Create
             title: New Petition
-      credentials:
-        create: Send
-        created: Credential created succesfully
-        description: Credential Issuer description
-        error: Can't create credential
-        invalid: Credential invalid
-        issuer: Credential Issuer
       models:
         petition:
           fields:

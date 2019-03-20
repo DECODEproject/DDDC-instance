@@ -7,7 +7,7 @@ services:
       - app_assets:/app/public/assets/
       - app_bundle:/app/vendor/bundle
       - app_file_storage:/app/public/system/
-      - app_logs:/app/logs/
+      - app_logs:/app/log/
       # For deploy with capistrano, pass the .ssh/config and ssh-agent
       - ~/.ssh:/root/.ssh
       - $SSH_AUTH_SOCK:/ssh-agent
@@ -27,6 +27,8 @@ services:
       - pg
       - redis
     command: bundle exec puma
+    stdin_open: true
+    tty: true
   worker:
     build: .
     volumes:
@@ -34,7 +36,7 @@ services:
       - app_assets:/app/public/assets/
       - app_bundle:/app/vendor/bundle
       - app_file_storage:/app/public/system/
-      - app_logs:/app/logs/
+      - app_logs:/app/log/
     environment:
       - DATABASE_HOST=pg
       - DATABASE_USERNAME=postgres

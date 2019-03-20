@@ -21,6 +21,13 @@ module Decidim
       field :image, !types.String, "Petition image square" do
         resolve ->(obj, _args, _ctx) { obj.image.url(:square) }
       end
+      field :attribute_id, !types.String, "Attribute ID for Decode APIs"
+      field :credential_issuer_api_url, !types.String, "Credential Issuer API URL for Decode APIs" do
+        resolve ->(obj, _args, _ctx) { Rails.application.secrets.decode[:credential_issuer][:url] }
+      end
+      field :petitions_api_url, !types.String, "Petitions API URL for Decode APIs" do
+        resolve ->(obj, _args, _ctx) { Rails.application.secrets.decode[:petitions][:url] }
+      end
     end
 
     JSONType = GraphQL::ScalarType.define do

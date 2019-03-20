@@ -16,7 +16,6 @@ module Decidim
       routes do
         # Add engine routes here
         resources :petitions, only: [:index, :show]
-        resources :credentials, only: [:index, :create]
         root to: "petitions#index"
       end
 

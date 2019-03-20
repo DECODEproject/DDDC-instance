@@ -31,3 +31,6 @@
 
 # Ignore public uploads
 public/uploads
+
+# Figaro
+config/application.yml
