@@ -27,7 +27,6 @@ module Decidim
       def self.base_scope(component)
         Petition
           .where(component: component)
-          .published
       end
     end
   end
