@@ -24,7 +24,7 @@ module Decidim
       end
 
       def attribute_id
-        Decidim.config.application_name.downcase.gsub(' ', '-') + "-" + id.to_s
+        (Decidim.config.application_name + "-" + title["en"]).downcase.gsub(' ', '-')
       end
 
       def closed?
