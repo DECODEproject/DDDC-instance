@@ -30,7 +30,8 @@ module Decidim
             description: form.description,
             image: form.image,
             json_schema: JSON.parse(form.json_schema),
-            json_attribute_info: JSON.parse(form.json_attribute_info)
+            json_attribute_info: JSON.parse(form.json_attribute_info),
+            json_attribute_info_optional: JSON.parse(form.json_attribute_info_optional)
           )
         end
       end

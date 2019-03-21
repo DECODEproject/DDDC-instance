@@ -53,6 +53,7 @@ en:
             description: Description
             json_schema: JSON Schema
             json_attribute_info: JSON Attribute Info for Credential Issuer
+            json_attribute_info_optional: JSON Attribute Info Optional for Credential Issuer
             summary: Summary
         petitions:
           activate:

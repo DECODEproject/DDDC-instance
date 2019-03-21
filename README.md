@@ -61,7 +61,7 @@ Go to the /admin, configure a new Participatory Process, add Petition component 
 
 ### JSON Schema and Attributes Authorization
 
-It's important to configure the JSON schema and JSON attribute info so it's consumed by the DECODE's wallet app and BCN Now dashboard:
+It's important to configure some JSON data so it's consumed by the DECODE's APIs:
 
 **json_schema**
 
@@ -104,23 +104,33 @@ It's important to configure the JSON schema and JSON attribute info so it's cons
 ]
 ```
 
+**json_attribute_info_optional**
+
+```json
+[
+  { attribute_info_key: 'gender', attribute_info_type: 'string', attribute_info_set: ['male','female'], attribute_info_k: 3 },
+  { attribute_info_key: 'age', attribute_info_type: 'integer', attribute_info_set: ['0-18','18-25','25-45','>45'], attribute_info_k: 3 },
+  { attribute_info_key: 'district', attribute_info_type: 'str', attribute_info_set: ['sant marti','gracia','...'], attribute_info_k: 3 }
+]
+```
+
 ## GraphQL
 
 To consume some data, you can do it on the GraphQL API:
 
 ```graphql
 {
-  petition(id:"1") {
-    id,
-    title,
-    description,
-    author,
-    json_schema,
-    image,
-    credential_issuer_api_url,
-    petitions_api_url,
-    attribute_id
-  }
+petition(id:"1") {
+id,
+title,
+description,
+author,
+json_schema,
+image,
+credential_issuer_api_url,
+petitions_api_url,
+attribute_id
+}
 }
 ```
 

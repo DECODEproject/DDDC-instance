@@ -27,6 +27,7 @@ module Decidim
             summary: @form.summary,
             json_schema: JSON.parse(@form.json_schema),
             json_attribute_info: JSON.parse(@form.json_attribute_info),
+            json_attribute_info_optional: JSON.parse(@form.json_attribute_info_optional),
             image: @form.image,
             description: @form.description,
             component: @form.current_component,
