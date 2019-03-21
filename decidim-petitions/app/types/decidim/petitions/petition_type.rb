@@ -16,7 +16,8 @@ module Decidim
       end
 
       field :description, JSONType, "Description of the petition."
-      field :json_schema, JSONType, "Schema"
+      field :json_schema, JSONType, "JSON Schema for DECODE"
+      field :json_attribute_info_optional, JSONType, "JSON Attribute Info Optional for DECODE"
 
       field :image, !types.String, "Petition image square" do
         resolve ->(obj, _args, _ctx) { obj.image.url(:square) }
