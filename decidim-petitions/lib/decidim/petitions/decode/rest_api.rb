@@ -6,17 +6,14 @@ module Decidim
     module Decode
       module RestApi
 
-        def get_bearer(url: '', username: '', password: '')
-          # Gets DDDC's API bearer to have an Authorization
-          # It's the same for the Credential Issuer and for the Petititons APIs
+        def decode_logger
+          @@decode_logger ||= Logger.new("#{Rails.root}/log/decode.log")
+        end
+
+        def logger message
+          # Log with Rails.logger or just to stdout
           #
-          resp = RestClient.post(
-            "#{url}/token",
-            {grant_type: "", username: username, password: password}
-          )
-          logger_resp "Bearer", resp
-          bearer = JSON.parse(resp.body)["access_token"]
-          bearer
+          decode_logger.info(message)
         end
 
         def logger_resp(message, resp)
@@ -32,10 +29,17 @@ module Decidim
           logger("*" * 80)
         end
 
-        def logger message
-          # Log with Rails.logger or just to stdout
+        def get_bearer(url: '', username: '', password: '')
+          # Gets DDDC's API bearer to have an Authorization
+          # It's the same for the Credential Issuer and for the Petititons APIs
           #
-          Rails.logger.info(message)
+          resp = RestClient.post(
+            "#{url}/token",
+            {grant_type: "", username: username, password: password}
+          )
+          logger_resp "Bearer", resp
+          bearer = JSON.parse(resp.body)["access_token"]
+          bearer
         end
 
         def wrapper(http_method: :post, http_path: '', bearer: '', params: {})
