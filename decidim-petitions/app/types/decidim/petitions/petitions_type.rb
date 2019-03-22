@@ -3,30 +3,20 @@
 module Decidim
   module Petitions
     PetitionsType = GraphQL::ObjectType.define do
-      interfaces [-> { Decidim::Core::ComponentInterface }]
-
       name "Petitions"
-      description "A petitions component of a participatory space."
-
-      connection :petitions, PetitionType.connection_type do
-        resolve ->(component, _args, _ctx) {
-                  PetitionsTypeHelper.base_scope(component).includes(:component)
-                }
-      end
-
-      field(:petition, PetitionType) do
-        argument :id, !types.ID
-
-        resolve ->(component, args, _ctx) {
-          PetitionsTypeHelper.base_scope(component).find_by(id: args[:id])
+      description "The petitions"
+      field :petition, PetitionType do
+        argument :id, !types.ID, "The petition unique ID"
+        resolve lambda { |_obj, args, ctx|
+          Petition.find_by(id: args[:id], organization: ctx[:current_organization])
         }
       end
-    end
 
-    module PetitionsTypeHelper
-      def self.base_scope(component)
-        Petition
-          .where(component: component)
+      field :all_petitions do
+        type types[PetitionType]
+        resolve lambda { |_obj, _args, ctx|
+          Petition.where(organization: ctx[:current_organization])
+        }
       end
     end
   end
