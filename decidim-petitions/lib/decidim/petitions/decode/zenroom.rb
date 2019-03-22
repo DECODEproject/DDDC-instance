@@ -9,7 +9,7 @@ module Decidim
         def self.hashing data
           # Hashes with zenroom some data. For having better privacy with Credential Issuer.
           #
-          `echo "print(ECDH.kdf(HASH.new('sha512'), '#{data}'))" | ./bin/zenroom-static 2> /dev/null`.strip
+          `echo "print(ECDH.kdf(HASH.new('sha512'), '#{data}'))" | "#{Rails.root}/bin/zenroom-static" 2> /dev/null`.strip
         end
 
       end
