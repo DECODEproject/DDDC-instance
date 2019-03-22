@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_21_150031) do
+ActiveRecord::Schema.define(version: 2019_03_22_182902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -872,7 +872,6 @@ ActiveRecord::Schema.define(version: 2019_03_21_150031) do
     t.string "decidim_author_type", null: false
     t.string "state", default: "closed"
     t.jsonb "json_attribute_info"
-    t.string "petition_bearer"
     t.jsonb "json_attribute_info_optional"
     t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_petitions_on_decidim_author"
     t.index ["decidim_component_id"], name: "index_decidim_petitions_petitions_on_decidim_component_id"
