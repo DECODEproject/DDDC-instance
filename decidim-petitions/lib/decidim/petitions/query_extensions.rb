@@ -13,6 +13,13 @@ module Decidim
             Petition.find_by(id: args[:id])
           }
         end
+
+        type.field :petitions do
+          type types[PetitionType]
+          resolve lambda { |_obj, _args, ctx|
+            Petition.all
+          }
+        end
       end
     end
   end

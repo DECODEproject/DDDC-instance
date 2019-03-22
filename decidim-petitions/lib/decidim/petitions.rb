@@ -9,7 +9,6 @@ module Decidim
   # This namespace holds the logic of the `Petitions` component. This component
   # allows users to create petitions in a participatory space.
   module Petitions
-    autoload :PetitionsType, "decidim/petitions/api/petitions_type"
     autoload :ViewModel, "decidim/petitions/view_model"
   end
 end
