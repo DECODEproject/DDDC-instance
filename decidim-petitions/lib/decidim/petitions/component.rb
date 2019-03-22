@@ -7,7 +7,6 @@ Decidim.register_component(:petitions) do |component|
   component.admin_engine = Decidim::Petitions::AdminEngine
   component.icon = "decidim/petitions/icon.svg"
 
-  component.query_type = "Decidim::Petitions::PetitionsType"
   component.permissions_class_name = "Decidim::Petitions::Permissions"
   # component.on(:before_destroy) do |instance|
   #   # Code executed before removing the component
