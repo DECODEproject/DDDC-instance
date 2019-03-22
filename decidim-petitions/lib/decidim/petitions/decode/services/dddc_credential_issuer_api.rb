@@ -18,7 +18,7 @@ module Decidim
             @login = login
           end
 
-          def create(hash_attributes: false, reissuable: false, attribute_id: '', attribute_info: '')
+          def create(hash_attributes: false, reissuable: false, attribute_id: '', attribute_info: '', attribute_info_optional: '')
             # Setup the Authorizable Attribute to Credential Issuer's API
             # If hash_attributes is true, then we hash the attribute_info with zenroom
             # If reissuable is true, then we send that configuration to Credential Issuer
@@ -26,6 +26,7 @@ module Decidim
             url = @login[:url]
             bearer = get_bearer( url: url, username: @login[:username], password: @login[:password])
             attribute_info = hash_attributes ? hash_attribute_info(attribute_info) : attribute_info
+            # TODO implement  ---- authorizable_attribute_info_optional: attribute_info_optional,
             params = { authorizable_attribute_id: "Authorizable Attribute #{attribute_id}",
                        authorizable_attribute_info: attribute_info,
                        reissuable: reissuable }
