@@ -39,7 +39,7 @@ module Decidim
       end
 
       def decode_url(petition)
-        "decodewallet:#{exp_url(petition)}"
+        "decodeapp:#{exp_url(petition)}"
       end
 
       def expo_url(petition)
