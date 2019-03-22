@@ -69,14 +69,13 @@
                   <% decode_options = [
                     {icon: "timer", command: "tally", name: "Tally Petitions"},
                     {icon: "cloud", command: "count", name: "Count Petitions"},
-                    {icon: "cloudy", command: "recount", name: "Count Zenroom"}
+                    {icon: "cloudy", command: "assert_count", name: "Assert Count with Zenroom"}
                   ] %>
                   <% decode_options.each do |option| %>
                     <%= icon_link_to option[:icon],
                           decode_petition_path(petition, command: option[:command].to_sym),
                           t("actions.close.#{option[:command]}", scope: "decidim.petitions"),
                           method: :post,
-                          data: { confirm: t("actions.confirm_count", service: option[:name], scope: "decidim.petitions") },
                           class: "action-icon--close-#{option[:command]}" %>
                   <% end %>
                 <% end %>

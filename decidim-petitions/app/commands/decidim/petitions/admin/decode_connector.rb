@@ -28,9 +28,7 @@ module Decidim
           when "barcelona_now_dashboard"
             connector.setup_barcelona_now
           when "petitions"
-            result = connector.setup_dddc_petitions
-            petition.update_attribute(:petition_bearer, result[:bearer])
-            result
+            connector.setup_dddc_petitions
           when "get"
             result = connector.get_dddc_petitions
             if result[:status_code] == 200
@@ -40,9 +38,19 @@ module Decidim
           when "tally"
             connector.tally_dddc_petitions
           when "count"
-            connector.count_dddc_petitions
-          when "recount"
-            connector.recount_dddc_petitions
+            result = connector.count_dddc_petitions
+            votes = JSON.parse(result[:response])["result"]
+            petition.update_attribute(:votes, votes)
+            result
+          when "assert_count"
+            response = connector.assert_count_dddc_petitions
+            api_result = connector.count_dddc_petitions
+            flash[:info] = "
+            Zenroom response = #{response} |||
+            Petitions API Count = #{api_result[:response]}  |||
+            Results = #{response == api_result[:response]}
+            "
+            result = { status_code: 200 }
           end
           unless result[:status_code] == 200
             flash[:error] = t(".errors.decode.#{@command}", status_code: result[:status_code])

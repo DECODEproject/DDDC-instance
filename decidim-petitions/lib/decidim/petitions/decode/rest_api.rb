@@ -1,31 +1,14 @@
 # frozen_string_literal: true
 #
 
+require "decidim/petitions/decode/file_logger"
+
 module Decidim
   module Petitions
     module Decode
       module RestApi
 
-        def decode_logger
-          @@decode_logger ||= Logger.new("#{Rails.root}/log/decode.log")
-        end
-
-        def logger message
-          # Log with Rails.logger or just to stdout
-          #
-          decode_logger.info(message)
-        end
-
-        def logger_resp(message, resp)
-          # Log rest-client responses
-          #
-          logger("-" * 80)
-          logger(message + " - response")
-          logger "STATUS CODE => #{resp.code}"
-          logger "BODY        => #{resp.body}"
-          logger "HEADERS     => #{resp.headers}"
-          logger("*" * 80)
-        end
+        include FileLogger
 
         def get_bearer(url: '', username: '', password: '')
           # Gets DDDC's API bearer to have an Authorization

@@ -15,29 +15,29 @@ module Decidim
             # login needs to be a hash with url, username and password
             # login = { url: "http://example.com", username: "demo", password: "demo"}
             @login = login
+            @bearer = get_bearer( url: @login[:url], username: @login[:username], password: @login[:password])
           end
 
           def create(petition_id: '', credential_issuer_url: '')
             # Creates the petition
             #
-            bearer = get_bearer( url: @login[:url], username: @login[:username], password: @login[:password])
             params = { petition_id: petition_id, credential_issuer_url: credential_issuer_url }
-            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/", bearer: bearer, params: params)
+            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/", bearer: @bearer, params: params)
           end
 
-          def tally(bearer: '', petition_id: '')
+          def tally(petition_id: '')
             # Tally the petition
             #
-            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/#{petition_id}/tally", bearer: bearer)
+            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/#{petition_id}/tally", bearer: @bearer)
           end
 
-          def count(bearer: '', petition_id: '')
+          def count(petition_id: '')
             # Count the petition
             #
-            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/#{petition_id}/count", bearer: bearer)
+            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/#{petition_id}/count", bearer: @bearer)
           end
 
-          def get(bearer: '', petition_id: '')
+          def get(petition_id: '')
             # Get the petition with extended information
             #
             wrapper(http_method: :get, http_path: "#{@login[:url]}/petitions/#{petition_id}?expand=true")

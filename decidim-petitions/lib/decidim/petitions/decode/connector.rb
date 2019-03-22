@@ -49,12 +49,20 @@ module Decidim
           )
         end
 
+        def get_dddc_petitions
+          dddc_petitions = Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
+            Rails.application.secrets.decode[:petitions]
+          )
+          dddc_petitions.get(
+            petition_id: @petition.attribute_id
+          )
+        end
+
         def tally_dddc_petitions
           dddc_petitions = Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
             Rails.application.secrets.decode[:petitions]
           )
           dddc_petitions.tally(
-            bearer: @petition.petition_bearer,
             petition_id: @petition.attribute_id
           )
         end
@@ -64,19 +72,19 @@ module Decidim
             Rails.application.secrets.decode[:petitions]
           )
           dddc_petitions.count(
-            bearer: @petition.petition_bearer,
             petition_id: @petition.attribute_id
           )
         end
 
-        def get_dddc_petitions
-          dddc_petitions = Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
-            Rails.application.secrets.decode[:petitions]
-          )
-          dddc_petitions.get(
-            petition_id: @petition.attribute_id
+        def assert_count_dddc_petitions
+          api_result = get_dddc_petitions
+          json_result = JSON.parse(api_result[:response])
+          Decidim::Petitions::Decode::Zenroom.count_petition(
+            json_tally: json_result["tally"],
+            json_petition: json_result["petition"],
           )
         end
+
       end
     end
   end
