@@ -38,14 +38,13 @@ module Decidim
             #
             logger "Credential issuer set-up - Authorizable attribute to hash"
             logger attribute_info
-
             output = []
             attribute_info.each do |attribute|
               hashes = []
               attribute["value_set"].each do |x|
                 hashes << Decidim::Petitions::Decode::Zenroom.hashing(x)
               end
-              attribute.update({value_set: hashes})
+              attribute["value_set"] = hashes
               output << attribute
             end
 
