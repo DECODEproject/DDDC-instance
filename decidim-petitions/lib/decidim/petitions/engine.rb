@@ -2,7 +2,6 @@
 
 require "rails"
 require "decidim/core"
-require "decidim/petitions/query_extensions"
 require "cells/rails"
 require "cells-erb"
 require "cell/partial"
@@ -21,12 +20,6 @@ module Decidim
 
       initializer "decidim_petitions.assets" do |app|
         app.config.assets.precompile += %w[decidim_petitions_manifest.js decidim_petitions_manifest.css]
-      end
-
-      initializer "decidim_petitions.query_extensions" do
-        Decidim::Api::QueryType.define do
-          QueryExtensions.define(self)
-        end
       end
 
       initializer "decidim_petitions.add_cells_view_path" do
