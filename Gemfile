@@ -12,9 +12,9 @@ DECIDIM_VERSION = {
 gem 'decidim', DECIDIM_VERSION
 # gem 'decidim-consultations', '0.13.1'
 # gem 'decidim-initiatives', '0.13.1'
+gem 'decidim-petitions', path: '.'
 
 gem 'bootsnap', '~> 1.3'
-gem 'decidim-petitions', path: '.'
 gem 'faker', '~> 1.8'
 gem 'figaro'
 gem 'puma', '~> 3.0'
