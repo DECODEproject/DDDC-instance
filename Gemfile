@@ -20,6 +20,7 @@ gem 'figaro'
 gem 'puma', '~> 3.0'
 gem 'sidekiq'
 gem 'uglifier', '~> 4.1'
+gem 'activerecord-session_store'
 
 group :development, :test do
   gem 'byebug', '~> 10.0', platform: :mri
