@@ -18,7 +18,12 @@ module Decidim
             @login = login
           end
 
-          def create(hash_attributes: false, reissuable: false, attribute_id: '', attribute_info: '', attribute_info_optional: '')
+          def create(hash_attributes: false,
+                     reissuable: false,
+                     attribute_id: '',
+                     attribute_info: '',
+                     attribute_info_optional: ''
+                    )
             # Setup the Authorizable Attribute to Credential Issuer's API
             # If hash_attributes is true, then we hash the attribute_info with zenroom
             # If reissuable is true, then we send that configuration to Credential Issuer
@@ -26,19 +31,20 @@ module Decidim
             url = @login[:url]
             bearer = get_bearer( url: url, username: @login[:username], password: @login[:password])
             attribute_info = hash_attributes ? hash_attribute_info(attribute_info) : attribute_info
-            # TODO implement  ---- authorizable_attribute_info_optional: attribute_info_optional,
+            attribute_info_optional = hash_attributes ? hash_attribute_info(attribute_info_optional) : attribute_info_optional
             params = { authorizable_attribute_id: "Authorizable Attribute #{attribute_id}",
                        authorizable_attribute_info: attribute_info,
+                       authorizable_attribute_info_optional: attribute_info_optional,
                        reissuable: reissuable }
-            wrapper(http_method: :post, http_path: "#{url}/authorizable_attribute", params: params, bearer: bearer)
+            wrapper(http_method: :post, http_path: "#{url}/authorizable_attribute/", params: params, bearer: bearer)
           end
 
           def hash_attribute_info attribute_info
             # Recieves an attribute info with value_sets on plain text
             # and converts them with a hashing function from zenroom
             #
-            logger "Credential issuer set-up - Authorizable attribute to hash"
-            logger attribute_info
+            logger "*" * 80
+            logger "ATTR TO HASH => #{attribute_info} "
             output = []
             attribute_info.each do |attribute|
               hashes = []
@@ -48,9 +54,8 @@ module Decidim
               attribute["value_set"] = hashes
               output << attribute
             end
-
-            logger "Credential issuer set-up - Authorizable attribute hashed"
-            logger output
+            logger "ATTR HASHED  => #{output} "
+            logger "*" * 80
             output
           end
 
