@@ -5,8 +5,6 @@ en:
       petitions:
         name: Petitions
         settings:
-          global:
-            chainspace_url: Chainspace URL
           step:
             announcement: Announcement
             votes_enabled: Votes enabled?
