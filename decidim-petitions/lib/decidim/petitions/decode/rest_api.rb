@@ -98,6 +98,7 @@ module Decidim
               status_code = 500
             end
           else
+            debugger if Rails.env.development?
             logger "FAILED! 500 error"
             logger("*" * 80)
             status_code = 500
