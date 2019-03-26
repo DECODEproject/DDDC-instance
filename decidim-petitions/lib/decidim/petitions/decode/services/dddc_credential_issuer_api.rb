@@ -59,6 +59,24 @@ module Decidim
             output
           end
 
+          def extract_first_attribute_info attribute_info
+            # Given an attribute_info we delete all the value_sets except the first one (that's also hashed)
+            # for being use with Petition API setup
+            # input = [{"name"=>"codes", "type"=>"str", "value_set"=>["aaaaa", "bbbbb", "ccccc"]}]
+            # output = [{"name"=>"codes", "type"=>"str", "value_set"=>["aaaaa"}]
+            #
+            logger "*" * 80
+            logger "ATTR TO EXTRACT  => #{attribute_info} "
+            attribute_info.each do |attribute|
+              attribute["value"] = Decidim::Petitions::Decode::Zenroom.hashing(attribute["value_set"][0])
+              attribute.except!("type", "value_set")
+            end
+            attribute_info
+            logger "ATTR EXTRACTED  => #{attribute_info} "
+            logger "*" * 80
+            attribute_info
+          end
+
         end
       end
     end

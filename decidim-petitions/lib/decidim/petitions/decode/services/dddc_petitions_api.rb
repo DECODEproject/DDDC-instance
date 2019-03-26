@@ -18,10 +18,15 @@ module Decidim
             @bearer = get_bearer( url: @login[:url], username: @login[:username], password: @login[:password])
           end
 
-          def create(petition_id: '', credential_issuer_url: '')
-            # Creates the petition
+          def create(petition_id: '', credential_issuer_url: '', credential_issuer_petition_value: '')
+            # Creates the petition. Needs a valid Credential Issuer Authorizable Attribute.
             #
-            params = { petition_id: petition_id, credential_issuer_url: credential_issuer_url }
+            params = {
+              petition_id: petition_id,
+              credential_issuer_url: credential_issuer_url,
+              credential_issuer_petition_value: credential_issuer_petition_value,
+              authorizable_attribute_id: petition_id
+            }
             wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/", bearer: @bearer, params: params)
           end
 

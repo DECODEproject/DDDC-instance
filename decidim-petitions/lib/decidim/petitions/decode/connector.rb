@@ -44,9 +44,15 @@ module Decidim
           dddc_petitions = Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
             Rails.application.secrets.decode[:petitions]
           )
+          dddc_credentials = Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI.new(
+            Rails.application.secrets.decode[:credential_issuer]
+          )
+          attribute_info = dddc_credentials.extract_first_attribute_info(@petition.json_attribute_info)
           dddc_petitions.create(
             petition_id: @petition.attribute_id,
-            credential_issuer_url: Rails.application.secrets.decode[:credential_issuer][:url]
+            credential_issuer_url: Rails.application.secrets.decode[:credential_issuer][:url],
+            credential_issuer_petition_value: attribute_info
+
           )
         end
 
