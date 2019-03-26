@@ -17,9 +17,11 @@ module Decidim
           dddc_credentials = Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI.new(
             Rails.application.secrets.decode[:credential_issuer]
           )
+          # We are not reissuing credentials on production
+          reissuable = Rails.env.production? ? false : true
           dddc_credentials.create(
             hash_attributes: true,
-            reissuable: false,
+            reissuable: reissuable,
             attribute_id: @petition.attribute_id,
             attribute_info: @petition.json_attribute_info,
             attribute_info_optional: @petition.json_attribute_info_optional
