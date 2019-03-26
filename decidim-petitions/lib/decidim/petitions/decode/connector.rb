@@ -17,7 +17,6 @@ module Decidim
           dddc_credentials = Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI.new(
             Rails.application.secrets.decode[:credential_issuer]
           )
-          # TODO: implement attribute_info_optional when Credentials API implements it
           dddc_credentials.create(
             hash_attributes: true,
             reissuable: false,
