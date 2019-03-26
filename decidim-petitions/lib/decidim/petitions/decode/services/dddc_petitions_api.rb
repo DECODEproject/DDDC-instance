@@ -33,7 +33,10 @@ module Decidim
           def tally(petition_id: '')
             # Tally the petition
             #
-            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/#{petition_id}/tally", bearer: @bearer)
+            params = {
+              authorizable_attribute_id: petition_id
+            }
+            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/#{petition_id}/tally", bearer: @bearer, params: params)
           end
 
           def count(petition_id: '')
