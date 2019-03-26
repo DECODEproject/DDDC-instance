@@ -32,7 +32,7 @@ module Decidim
             bearer = get_bearer( url: url, username: @login[:username], password: @login[:password])
             attribute_info = hash_attributes ? hash_attribute_info(attribute_info) : attribute_info
             attribute_info_optional = hash_attributes ? hash_attribute_info(attribute_info_optional) : attribute_info_optional
-            params = { authorizable_attribute_id: "Authorizable Attribute #{attribute_id}",
+            params = { authorizable_attribute_id: attribute_id,
                        authorizable_attribute_info: attribute_info,
                        authorizable_attribute_info_optional: attribute_info_optional,
                        reissuable: reissuable }
