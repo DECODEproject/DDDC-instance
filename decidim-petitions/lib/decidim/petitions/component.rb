@@ -78,9 +78,9 @@ Decidim.register_component(:petitions) do |component|
           }
         ],
         json_attribute_info_optional: [
-          { attribute_info_key: 'gender', attribute_info_type: 'string', attribute_info_set: ['male','female'], attribute_info_k: 3 },
-          { attribute_info_key: 'age', attribute_info_type: 'integer', attribute_info_set: ['0-18','18-25','25-45','>45'], attribute_info_k: 3 },
-          { attribute_info_key: 'district', attribute_info_type: 'str', attribute_info_set: ['sant marti','gracia','...'], attribute_info_k: 3 }
+          { "k": 2, "name": "age", "type": "str", "value_set": [ "0-19", "20-29", "30-39", ">40" ] },
+          { "k": 2, "name": "gender", "type": "str", "value_set": [ "F", "M", "O" ] },
+          { "k": 2, "name": "district", "type": "str", "value_set": [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ] }
         ]
       )
     end
