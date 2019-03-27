@@ -16,7 +16,7 @@ module Decidim
         def self.hashing data
           # Hashes with zenroom some data. For having better privacy with Credential Issuer.
           #
-          `echo "print(ECDH.kdf(HASH.new('sha512'), '#{data}'))" | #{ZENROOM} 2> /dev/null`.strip
+          `echo "print(ECDH.kdf(HASH.new('sha512'), str('#{data}')))" | #{ZENROOM} 2> /dev/null`.strip
         end
 
         def self.write_to_tmp_file(filename, contents)
