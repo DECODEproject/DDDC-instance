@@ -64,6 +64,13 @@ en:
               credential_issuer: The petition was succesfully created on Credential Issuer API
               barcelona_now_dashboard: The petition was succesfully created on Barcelona Now API
               petitions: The petition was succesfully created on Petitions API
+              tally: Tally successfully done
+              count: Count successfully done
+              assert_count: Count successfully done
+            duplicated:
+              credential_issuer: Seems like there's already a petition with that data on Credential Issuer. Check logs.
+              barcelona_now_dashboard: Seems like there's already a petition with that data on Barcelona Now Dashboard. Check logs.
+              petitions: Seems like there's already a petition with that data on Petitions API. Check logs.
           deactivate:
             success: The petition was closed succesfully
           update:
