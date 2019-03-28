@@ -95,7 +95,7 @@ en:
           summary: Summary
           votes: Votes
         show:
-          incompatible_html: You're not on a compatible device. <a href="%{url}">Download the app</a> and visit this page with your mobile phone, or scan the QR code with Decode App.
+          incompatible_html: You're not on a compatible device. Get a credential, download the app and sign the petition from the app. <a href="%{url}">Read instructions.</a>
       states:
         closed: Closed
         opened: Open

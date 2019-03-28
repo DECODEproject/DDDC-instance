@@ -31,7 +31,9 @@ module Decidim
             image: form.image,
             json_schema: JSON.parse(form.json_schema),
             json_attribute_info: JSON.parse(form.json_attribute_info),
-            json_attribute_info_optional: JSON.parse(form.json_attribute_info_optional)
+            json_attribute_info_optional: JSON.parse(form.json_attribute_info_optional),
+            is_reissuable: @form.is_reissuable,
+            instructions_url: @form.instructions_url
           )
         end
       end

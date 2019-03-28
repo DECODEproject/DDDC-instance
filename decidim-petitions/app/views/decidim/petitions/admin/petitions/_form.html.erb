@@ -10,10 +10,16 @@
       <%= form.translated :editor, :summary, toolbar: :full, lines: 10, label: t("model.components.summary", scope: "decidim.petitions.admin") %>
     </div>
     <div class="row column">
+      <%= form.translated :editor, :description, toolbar: :full, lines: 10, label: t("model.components.description", scope: "decidim.petitions.admin") %>
+    </div>
+    <div class="row column">
       <%= form.upload :image %>
     </div>
     <div class="row column">
-      <%= form.translated :editor, :description, toolbar: :full, lines: 10, label: t("model.components.description", scope: "decidim.petitions.admin") %>
+      <%= form.translated :text_field, :instructions_url %>
+    </div>
+    <div class="row column">
+      <%= form.check_box :is_reissuable %>
     </div>
     <div class="row column">
       <%= form.text_area :json_schema, value: JSON.pretty_generate(@form.json_schema), toolbar: nil, rows: 30, label: t("model.components.json_schema", scope: "decidim.petitions.admin") %>

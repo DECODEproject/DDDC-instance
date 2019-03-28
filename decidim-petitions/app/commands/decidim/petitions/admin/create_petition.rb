@@ -31,7 +31,9 @@ module Decidim
             image: @form.image,
             description: @form.description,
             component: @form.current_component,
-            author: @current_user
+            author: @current_user,
+            is_reissuable: @form.is_reissuable,
+            instructions_url: @form.instructions_url
           )
         end
       end

@@ -19,17 +19,22 @@
               large-3 large-push-9">
     <div class="card">
       <div class="card__content">
+        <% if petition.opened? %>
+          <div class="hide-for-touch show-for-desktop card__actions callout secondary">
+            <%= t ".incompatible_html", url: translated_attribute(petition.instructions_url) %>
+          </div>
+        <% end %>
         <div class="card__qr">
           <img src="<%= petition_qrcode(petition) %>" />
         </div>
-        <%= render partial: "votes_count" %>
-        <div class="show-for-touch card__actions">
-          <%= decodewallet_button(petition) %>
-          <%= expo_button(petition) %>
-        </div>
-        <div class="hide-for-touch card__actions callout secondary">
-          <%= t ".incompatible_html", url: "#" %>
-        </div>
+        <% if petition.closed? %>
+          <%= render partial: "votes_count" %>
+        <% end %>
+        <% if petition.opened? %>
+          <div class="show-for-touch card__actions">
+            <%= decodewallet_button(petition) %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

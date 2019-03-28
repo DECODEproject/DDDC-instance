@@ -9,10 +9,12 @@ module Decidim
         translatable_attribute :title, String
         translatable_attribute :summary, String
         translatable_attribute :description, String
+        translatable_attribute :instructions_url, String
         attribute :image
         attribute :json_schema, JSON
         attribute :json_attribute_info, JSON
         attribute :json_attribute_info_optional, JSON
+        attribute :is_reissuable
 
         mimic :petition
 
