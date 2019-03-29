@@ -26,10 +26,12 @@ $decode-5: #e37fd2;
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
+body {
+  font-size: 0.9rem;
+}
 
 body, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   font-family: "Montserrat","Century Gothic",Verdana,Helvetica,Arial,sans-serif;
-  font-size: 0.9rem;
 }
 
 .title-bar {
