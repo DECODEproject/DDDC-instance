@@ -100,7 +100,7 @@ en:
           open_wallet: Sign with Decode App
           participate: Participate
           summary: Summary
-          votes: Votes
+          votes: Signatures
         show:
           incompatible_html: You're not on a compatible device. Get a credential, download the app and sign the petition from the app. <a href="%{url}">Read instructions.</a>
       states:
