@@ -34,6 +34,14 @@ body, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   font-family: "Montserrat","Century Gothic",Verdana,Helvetica,Arial,sans-serif;
 }
 
+h2 {
+  font-size: 1.2rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
 .title-bar {
   padding: 40px;
 }
@@ -70,7 +78,7 @@ body, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 
 .section-heading {
   text-transform: inherit;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   display: inline-block;
   //.section-heading extra styling for the borders on JavaScript
   border-bottom: 10px solid $primary;
