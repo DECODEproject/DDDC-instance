@@ -11,9 +11,13 @@ module Decidim
         end
 
         def logger message
-          # Log with Rails.logger or just to stdout
+          # Log with Rails.logger or just to stdout for Heroku
           #
-          decode_logger.info(message)
+          if ENV["RAILS_LOG_TO_STDOUT"].present?
+            Rails.logger.info("DDDC-API -> #{message}")
+          else
+            decode_logger.info(message)
+          end
         end
 
         def logger_resp(message, resp)
