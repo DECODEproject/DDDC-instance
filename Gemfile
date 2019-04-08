@@ -9,6 +9,7 @@ DECIDIM_VERSION = {
   branch: '0.17-stable'
 }.freeze
 
+#DECIDIM_VERSION = '0.17.0'
 gem 'decidim', DECIDIM_VERSION
 # gem 'decidim-consultations', '0.13.1'
 # gem 'decidim-initiatives', '0.13.1'
