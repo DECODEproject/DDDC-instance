@@ -22,6 +22,44 @@ module Decidim
 
         attr_reader :petition
 
+        def assert_count connector
+          response = connector.assert_count_dddc_petitions
+          api_result = connector.count_dddc_petitions
+          flash[:info] = "
+          Zenroom response = #{response} |||
+          Petitions API Count = #{api_result[:response]}  |||
+          Results = #{response == api_result[:response]}
+          "
+          result = { status_code: 200 }
+        end 
+
+        def get_and_show_response connector
+          result = connector.get_dddc_petitions
+          if result[:status_code] == 200
+            flash[:info] = result[:response].body.as_json
+          end
+          result
+        end
+
+        def count_and_update_votes connector
+          result = connector.count_dddc_petitions
+          votes = JSON.parse(result[:response])["result"]
+          petition.update_attribute(:votes, votes)
+          result
+        end
+
+        def flash_decode_result status_code
+          unless status_code == 200
+            case status_code
+            when 409
+              # Status Code 409 is Conflict, as in "there's already that content on the API"
+              flash[:warning] = t(".duplicated.#{@command}", status_code: status_code)
+            else
+              flash[:error] = t(".errors.#{@command}", status_code: status_code)
+            end
+          end
+        end
+
         def decode_command
           # Wrapper for decode commands
           # Every command corresponds with an action on a DECODE service
@@ -37,41 +75,15 @@ module Decidim
           when "petitions"
             connector.setup_dddc_petitions
           when "get"
-            result = connector.get_dddc_petitions
-            # Shows the raw response on an alert
-            if result[:status_code] == 200
-              flash[:info] = result[:response].body.as_json
-            end
-            result
+            get_and_show_response(connector)
           when "tally"
             connector.tally_dddc_petitions
           when "count"
-            # Get and save votes from Petitions API
-            result = connector.count_dddc_petitions
-            votes = JSON.parse(result[:response])["result"]
-            petition.update_attribute(:votes, votes)
-            result
+            count_and_update_votes(connector)
           when "assert_count"
-            # Get votes from Petitions API and check it with Zenroom value
-            # Shows the raw response on an alert
-            response = connector.assert_count_dddc_petitions
-            api_result = connector.count_dddc_petitions
-            flash[:info] = "
-            Zenroom response = #{response} |||
-            Petitions API Count = #{api_result[:response]}  |||
-            Results = #{response == api_result[:response]}
-            "
-            result = { status_code: 200 }
+            result = assert_count(connector) 
           end
-          unless result[:status_code] == 200
-            case result[:status_code]
-            when 409
-              # Status Code 409 is Conflict, as in "there's already that content on the API"
-              flash[:warning] = t(".duplicated.#{@command}", status_code: result[:status_code])
-            else
-              flash[:error] = t(".errors.#{@command}", status_code: result[:status_code])
-            end
-          end
+          flash_decode_result(result[:status_code])
         end
       end
     end
