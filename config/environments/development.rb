@@ -63,4 +63,7 @@ Rails.application.configure do
 
   # No precompilation on demand on first request
   config.assets.check_precompiled_asset = false
+
+  # web-console for docker
+  config.web_console.whitelisted_ips = ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16']
 end
