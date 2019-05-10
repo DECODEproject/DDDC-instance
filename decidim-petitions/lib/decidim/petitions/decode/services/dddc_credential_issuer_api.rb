@@ -28,15 +28,16 @@ module Decidim
             # If hash_attributes is true, then we hash the attribute_info with zenroom
             # If reissuable is true, then we send that configuration to Credential Issuer
             #
-            url = @login[:url]
-            bearer = get_bearer( url: url, username: @login[:username], password: @login[:password])
-            attribute_info = hash_attributes ? hash_attribute_info(attribute_info) : attribute_info
-            attribute_info_optional = hash_attributes ? hash_attribute_info(attribute_info_optional) : attribute_info_optional
-            params = { authorizable_attribute_id: attribute_id,
-                       authorizable_attribute_info: attribute_info,
-                       authorizable_attribute_info_optional: attribute_info_optional,
-                       reissuable: reissuable }
-            wrapper(http_method: :post, http_path: "#{url}/authorizable_attribute/", params: params, bearer: bearer)
+            wrapper(http_method: :post,
+              http_path: "#{@login[:url]}/authorizable_attribute/",
+              params: {
+                authorizable_attribute_id: attribute_id,
+                authorizable_attribute_info: hash_attributes ? hash_attribute_info(attribute_info) : attribute_info,
+                authorizable_attribute_info_optional: hash_attributes ? hash_attribute_info(attribute_info_optional) : attribute_info_optional,
+                reissuable: reissuable
+              },
+              bearer: get_bearer(url: @login[:url], username: @login[:username], password: @login[:password])
+            )
           end
 
           def hash_attribute_info attribute_info
