@@ -15,6 +15,16 @@ Decidim.register_component(:petitions) do |component|
   # These actions permissions can be configured in the admin panel
   # component.actions = %w()
 
+  component.settings(:global) do |settings|
+    settings.attribute :credential_issuer_api_url, type: :string, default: "https://credentials.decodeproject.eu"
+    settings.attribute :credential_issuer_api_user, type: :string, default: ""
+    settings.attribute :credential_issuer_api_pass, type: :string, default: ""
+    settings.attribute :petitions_api_url, type: :string, default: "https://petitions.decodeproject.eu"
+    settings.attribute :petitions_api_user, type: :string, default: ""
+    settings.attribute :petitions_api_pass, type: :string, default: ""
+    settings.attribute :dashboard_api_url, type: :string, default: ""
+  end  
+
   component.settings(:step) do |settings|
     settings.attribute :announcement, type: :text, translated: true, editor: true
     settings.attribute :votes_enabled, type: :boolean

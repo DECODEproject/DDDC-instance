@@ -66,7 +66,7 @@ module Decidim
           # It should always responds with a { status_code: XX } at least
           # Could also have { status_code: XX, response: "YYY" }
           #
-          connector = Decidim::Petitions::Decode::Connector.new(petition)
+          connector = Decidim::Petitions::Decode::Connector.new(petition, current_component)
           result = case @command
           when "credential_issuer"
             connector.setup_dddc_credentials

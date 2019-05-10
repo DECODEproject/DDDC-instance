@@ -8,6 +8,14 @@ en:
           step:
             announcement: Announcement
             votes_enabled: Votes enabled?
+          global:
+            credential_issuer_api_url: Credential Issuer API URL
+            credential_issuer_api_user: Credential Issuer API user
+            credential_issuer_api_pass: Credential Issuer API password
+            petitions_api_url: Petitions API URL
+            petitions_api_user: Petitions API user
+            petitions_api_pass: Petitions API password
+            dashboard_api_url: Barcelona Now API URL
     pages:
       home:
         statistics:
@@ -22,11 +30,10 @@ en:
         confirm_open: >
           Are you sure to open this petition?
 
-          You'll need to also create the petition on hte diferent DECODE APIs.
+          You'll need to also create the petition on the different DECODE APIs.
 
-          Please check that you have configured (through secrets.yml or environmental variables)
-          all the URL for these services. Check the documentation. This action is irreversible,
-          to try again you need to change the petition title.
+          Please check that you have configured correctly all the URL for these services. 
+          This action is irreversible, to try again you need to change the petition title.
         close:
           tally: Tally with Petitions API
           count: Count with Petitions API
@@ -59,6 +66,7 @@ en:
             success: The petition was opened succesfully
           decode:
             errors:
+              credential_issuer: There was an error with the request to Credential Issuer. Please check the server logs for details.
               tally: There was an error with the request to the server to Tally. Please check the server logs for details.
             success:
               credential_issuer: The petition was succesfully created on Credential Issuer API
