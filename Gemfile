@@ -6,14 +6,13 @@ ruby RUBY_VERSION
 
 DECIDIM_VERSION = {
   git: 'https://github.com/decidim/decidim.git',
-  branch: '0.17-stable'
+  branch: '0.18-stable'
 }.freeze
 
-#DECIDIM_VERSION = '0.17.0'
 gem 'decidim', DECIDIM_VERSION
-# gem 'decidim-consultations', '0.13.1'
-# gem 'decidim-initiatives', '0.13.1'
-gem 'decidim-petitions', path: '.'
+gem 'decidim-petitions', git: 'https://github.com/alabs/decidim-module-petitions'
+
+gem "sprockets", "~> 3.7.2"
 
 gem 'bootsnap', '~> 1.3'
 gem 'faker', '~> 1.8'

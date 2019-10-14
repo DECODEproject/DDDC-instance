@@ -1,1 +1,0 @@
-print(ECDH.kdf(HASH.new('sha512'), DATA))
