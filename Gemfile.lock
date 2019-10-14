@@ -1,14 +1,6 @@
 GIT
-  remote: git://github.com/seuros/capistrano-sidekiq.git
-  revision: 92bf51eae4bdcc2eee2c1d0b2883d77e5e3f1ab8
-  specs:
-    capistrano-sidekiq (1.0.3)
-      capistrano (>= 3.9.0)
-      sidekiq (>= 3.4, < 6.0)
-
-GIT
   remote: https://github.com/alabs/decidim-module-petitions
-  revision: c1901d6249c844654bf892afcf30eda44489f311
+  revision: 99f82667f2125c096e8a266eda8d989e1b1ac447
   specs:
     decidim-petitions (0.18.0)
       cells-erb (~> 0.1.0)
@@ -208,6 +200,14 @@ GIT
       sassc-rails (~> 1.3)
     decidim-verifications (0.18.0)
       decidim-core (= 0.18.0)
+
+GIT
+  remote: https://github.com/seuros/capistrano-sidekiq.git
+  revision: 92bf51eae4bdcc2eee2c1d0b2883d77e5e3f1ab8
+  specs:
+    capistrano-sidekiq (1.0.3)
+      capistrano (>= 3.9.0)
+      sidekiq (>= 3.4, < 6.0)
 
 GEM
   remote: https://rubygems.org/
