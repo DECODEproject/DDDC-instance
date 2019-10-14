@@ -12,15 +12,15 @@ DECIDIM_VERSION = {
 gem 'decidim', DECIDIM_VERSION
 gem 'decidim-petitions', git: 'https://github.com/alabs/decidim-module-petitions'
 
-gem "sprockets", "~> 3.7.2"
+gem 'sprockets', '~> 3.7.2'
 
+gem 'activerecord-session_store'
 gem 'bootsnap', '~> 1.3'
 gem 'faker', '~> 1.8'
 gem 'figaro'
 gem 'puma', '~> 3.0'
 gem 'sidekiq'
 gem 'uglifier', '~> 4.1'
-gem 'activerecord-session_store'
 
 group :development, :test do
   gem 'byebug', '~> 10.0', platform: :mri
@@ -39,10 +39,10 @@ group :development do
   gem 'bcrypt_pbkdf'
   gem 'capistrano', '3.10.2', require: false
   gem 'capistrano-bundler', '~> 1.2', require: false
-  gem 'capistrano3-puma'
   gem 'capistrano-rails', '1.1.8', require: false
   gem 'capistrano-rbenv'
-  gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
+  gem 'capistrano-sidekiq', git: 'https://github.com/seuros/capistrano-sidekiq.git'
+  gem 'capistrano3-puma'
   gem 'ed25519'
 end
 
