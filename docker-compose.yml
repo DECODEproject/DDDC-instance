@@ -8,16 +8,12 @@ services:
       - app_bundle:/app/vendor/bundle
       - app_file_storage:/app/public/system/
       - app_logs:/app/log/
-      # For deploy with capistrano, pass the .ssh/config and ssh-agent
-      - ~/.ssh:/root/.ssh
-      - $SSH_AUTH_SOCK:/ssh-agent
     environment:
       - PORT=3000
       - DATABASE_HOST=pg
       - DATABASE_USERNAME=postgres
       - RAILS_ENV=development
       - REDIS_URL=redis://redis:6379
-      - SSH_AUTH_SOCK=/ssh-agent
     depends_on:
       - pg
       - redis

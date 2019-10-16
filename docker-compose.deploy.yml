@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app:
+    volumes:
+      # For deploy with capistrano, pass the .ssh/config and ssh-agent
+      - ~/.ssh:/root/.ssh
+      - $SSH_AUTH_SOCK:/ssh-agent
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
