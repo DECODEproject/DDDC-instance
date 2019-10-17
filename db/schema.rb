@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_14_145546) do
+ActiveRecord::Schema.define(version: 2019_10_17_173021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
   enable_extension "pg_trgm"
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "decidim_accountability_results", id: :serial, force: :cascade do |t|
     t.jsonb "title"
@@ -882,6 +884,9 @@ ActiveRecord::Schema.define(version: 2019_10_14_145546) do
     t.jsonb "json_attribute_info_optional"
     t.boolean "is_reissuable"
     t.jsonb "instructions_url"
+    t.integer "decidim_user_group_id"
+    t.text "log"
+    t.jsonb "status", default: {"create_petition"=>false, "credential_issuer"=>false, "barcelona_now_dashboard"=>false}
     t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_petitions_on_decidim_author"
     t.index ["decidim_component_id"], name: "index_decidim_petitions_petitions_on_decidim_component_id"
     t.index ["decidim_organization_id"], name: "index_decidim_petition_on_decidim_organization_id"
