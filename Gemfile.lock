@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/alabs/decidim-module-petitions
-  revision: 4118538021315e1b77d1533d21f9954fad5b2a1e
+  revision: 74ca3d3345faded3e9d0db97b2222e496c9aa32d
   specs:
     decidim-petitions (0.18.0)
       cells-erb (~> 0.1.0)
@@ -353,7 +353,7 @@ GEM
     connection_pool (2.2.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
-    crass (1.0.4)
+    crass (1.0.5)
     css_parser (1.7.0)
       addressable
     dalli (2.7.10)
@@ -823,7 +823,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
-    wisper (2.0.0)
+    wisper (2.0.1)
     wisper-rspec (1.1.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
