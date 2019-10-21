@@ -2,7 +2,7 @@
 lock "~> 3.10.2"
 
 set :application, "DDDC"
-set :repo_url, "https://github.com/alabs/DDDC.git"
+set :repo_url, "https://github.com/DECODEproject/DDDC-instance"
 
 set :deploy_to, "/home/ruby-data/app"
 
