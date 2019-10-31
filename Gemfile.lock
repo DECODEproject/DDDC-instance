@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/alabs/decidim-module-petitions
-  revision: f6fca2a6898d0e2bf269f88673bc92fb6f3249c6
+  revision: c4bfc5ccb1a7b1188c831745baca90eda0244a12
   specs:
     decidim-petitions (0.18.0)
       cells-erb (~> 0.1.0)
