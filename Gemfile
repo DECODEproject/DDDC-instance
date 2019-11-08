@@ -10,7 +10,7 @@ DECIDIM_VERSION = {
 }.freeze
 
 gem 'decidim', DECIDIM_VERSION
-gem 'decidim-petitions', git: 'https://github.com/alabs/decidim-module-petitions'
+gem 'decidim-petitions', git: 'https://github.com/decodeproject/decidim-module-petitions'
 
 gem 'sprockets', '~> 3.7.2'
 

@@ -1,15 +1,4 @@
 GIT
-  remote: https://github.com/alabs/decidim-module-petitions
-  revision: c4bfc5ccb1a7b1188c831745baca90eda0244a12
-  specs:
-    decidim-petitions (0.18.0)
-      cells-erb (~> 0.1.0)
-      cells-rails (~> 0.0.9)
-      decidim-core (= 0.18.0)
-      rest-client (~> 2.0)
-      rqrcode (~> 0.10)
-
-GIT
   remote: https://github.com/decidim/decidim.git
   revision: edf56c46698971ab7e6cb35df2180a361140ac24
   branch: 0.18-stable
@@ -200,6 +189,17 @@ GIT
       sassc-rails (~> 1.3)
     decidim-verifications (0.18.0)
       decidim-core (= 0.18.0)
+
+GIT
+  remote: https://github.com/decodeproject/decidim-module-petitions
+  revision: 7ead7f897f568aa4e2af83360e637cfa63efdcfd
+  specs:
+    decidim-petitions (0.18.0)
+      cells-erb (~> 0.1.0)
+      cells-rails (~> 0.0.9)
+      decidim-core (= 0.18.0)
+      rest-client (~> 2.0)
+      rqrcode (~> 0.10)
 
 GIT
   remote: https://github.com/seuros/capistrano-sidekiq.git
