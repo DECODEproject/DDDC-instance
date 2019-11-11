@@ -192,7 +192,7 @@ GIT
 
 GIT
   remote: https://github.com/decodeproject/decidim-module-petitions
-  revision: 7ead7f897f568aa4e2af83360e637cfa63efdcfd
+  revision: b3ba841673dd07b58ffdbdeacc01018f003ba18b
   specs:
     decidim-petitions (0.18.0)
       cells-erb (~> 0.1.0)
