@@ -18,7 +18,7 @@ gem 'activerecord-session_store'
 gem 'bootsnap', '~> 1.3'
 gem 'faker', '~> 1.8'
 gem 'figaro'
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.12'
 gem 'sidekiq'
 gem 'uglifier', '~> 4.1'
 
